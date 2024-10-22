@@ -1,5 +1,5 @@
 {
-  "name": "i-forgot-to-rename-my-package",
+  "name": "getsetdel",
   "version": "0.0.1",
   "type": "module",
   "exports": {
@@ -49,9 +49,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/user/i-forgot-to-rename-my-package"
+    "url": "git+https://github.com/ericvera/getsetdel.git"
   },
-  "keywords": [],
+  "keywords": [
+    "idb",
+    "indexeddb",
+    "keyvalue",
+    "key-value",
+    "keyval",
+    "store",
+    "web",
+    "storage",
+    "idb-keyval"
+  ],
   "license": "MIT",
   "lint-staged": {
     "*.{ts,tsx,mjs}": "eslint --cache",

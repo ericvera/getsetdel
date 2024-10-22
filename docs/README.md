@@ -1,8 +1,8 @@
-**i-forgot-to-rename-my-package** • **Docs**
+**getsetdel** • **Docs**
 
 ---
 
-# i-forgot-to-rename-my-package
+# getsetdel
 
 ## Functions
 
