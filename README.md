@@ -5,6 +5,10 @@
 [![github license](https://img.shields.io/github/license/ericvera/getsetdel.svg?style=flat-square)](https://github.com/ericvera/getsetdel/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/getsetdel.svg?style=flat-square)](https://npmjs.org/package/getsetdel)
 
+> ### NOT READY TO BE USED!
+>
+> Actively working on an initial working version.
+
 Features:
 
 - Key-value pair storage
