@@ -5,7 +5,5 @@ export const DBNameSuffix = '--'
 export const LocalDBStoreInventoryName = 'getsetval-inventory'
 export const StoreName = 'store'
 
-export const InventoryStore: UseStore = createStore(
-  LocalDBStoreInventoryName,
-  StoreName,
-)
+export const createInventoryStore = (): UseStore =>
+  createStore(LocalDBStoreInventoryName, StoreName)

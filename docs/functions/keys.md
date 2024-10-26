@@ -6,13 +6,13 @@
 
 # Function: keys()
 
-> **keys**(`storeInfo`): `Promise`\<`string`[]\>
+> **keys**(`storeToken`): `Promise`\<`string`[]\>
 
 ## Parameters
 
-| Parameter   | Type                                                                                           |
-| ----------- | ---------------------------------------------------------------------------------------------- |
-| `storeInfo` | [`GetSetValStoreInfo`](../interfaces/GetSetValStoreInfo.md)\<`Record`\<`string`, `unknown`\>\> |
+| Parameter    | Type                                                          |
+| ------------ | ------------------------------------------------------------- |
+| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
 
 ## Returns
 
@@ -20,4 +20,4 @@
 
 ## Defined in
 
-[keys.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/keys.ts#L5)
+[src/keys.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/keys.ts#L5)

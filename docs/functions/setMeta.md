@@ -6,23 +6,16 @@
 
 # Function: setMeta()
 
-> **setMeta**\<`TMeta`\>(`prop`, `value`, `storeInfo`): `Promise`\<`void`\>
+> **setMeta**(`storeToken`, `meta`): `Promise`\<`void`\>
 
 Replaces the value of the specified property in the store's meta object.
 
-## Type Parameters
-
-| Type Parameter | Default type                    |
-| -------------- | ------------------------------- |
-| `TMeta`        | `Record`\<`string`, `unknown`\> |
-
 ## Parameters
 
-| Parameter   | Type                                                                   |
-| ----------- | ---------------------------------------------------------------------- |
-| `prop`      | keyof `TMeta`                                                          |
-| `value`     | `undefined` \| `TMeta`\[keyof `TMeta`\]                                |
-| `storeInfo` | [`GetSetValStoreInfo`](../interfaces/GetSetValStoreInfo.md)\<`TMeta`\> |
+| Parameter    | Type                                                          |
+| ------------ | ------------------------------------------------------------- |
+| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
+| `meta`       | `Record`\<`string`, `unknown`\>                               |
 
 ## Returns
 
@@ -30,4 +23,4 @@ Replaces the value of the specified property in the store's meta object.
 
 ## Defined in
 
-[setMeta.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/setMeta.ts#L10)
+[src/setMeta.ts:9](https://github.com/ericvera/getsetdel/blob/main/src/setMeta.ts#L9)

@@ -1,6 +1,11 @@
-import { keys as libKeys } from 'idb-keyval'
-import { getStore } from './internal/getStore.js'
-import { GetSetValStoreInfo } from './types.js'
+import { keys as idbKeys } from 'idb-keyval'
+import { checkStoreState } from './internal/checkStoreState.js'
+import { GetSetValStoreToken } from './types.js'
 
-export const keys = async (storeInfo: GetSetValStoreInfo): Promise<string[]> =>
-  libKeys(await getStore(storeInfo))
+export const keys = async (
+  storeToken: GetSetValStoreToken,
+): Promise<string[]> => {
+  await checkStoreState(storeToken)
+
+  return idbKeys(storeToken.store)
+}

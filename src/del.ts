@@ -1,8 +1,12 @@
-import { delMany as libDelMany } from 'idb-keyval'
-import { getStore } from './internal/getStore.js'
-import { GetSetValStoreInfo } from './types.js'
+import { delMany } from 'idb-keyval'
+import { checkStoreState } from './internal/checkStoreState.js'
+import { GetSetValStoreToken } from './types.js'
 
 export const del = async (
-  storeInfo: GetSetValStoreInfo,
+  storeToken: GetSetValStoreToken,
   keys: string[],
-): Promise<void> => libDelMany(keys, await getStore(storeInfo))
+): Promise<void> => {
+  await checkStoreState(storeToken)
+
+  return delMany(keys, storeToken.store)
+}

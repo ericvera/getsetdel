@@ -1,12 +1,11 @@
-import { getMany } from 'idb-keyval'
+import { entries as idbEntries } from 'idb-keyval'
 import { checkStoreState } from './internal/checkStoreState.js'
 import { GetSetValStoreToken } from './types.js'
 
-export const get = async <T>(
+export const entries = async <T>(
   storeToken: GetSetValStoreToken,
-  keys: string[],
-): Promise<T[]> => {
+): Promise<[string, T][]> => {
   await checkStoreState(storeToken)
 
-  return getMany(keys, storeToken.store)
+  return idbEntries(storeToken.store)
 }

@@ -4,13 +4,11 @@
 
 [getsetdel](../README.md) / GetSetValStoreInfo
 
-# Interface: GetSetValStoreInfo\<TMeta\>
+# Interface: GetSetValStoreInfo
 
-## Type Parameters
+## Extended by
 
-| Type Parameter | Default type                    |
-| -------------- | ------------------------------- |
-| `TMeta`        | `Record`\<`string`, `unknown`\> |
+- [`GetSetValStoreInfoData`](GetSetValStoreInfoData.md)
 
 ## Properties
 
@@ -20,17 +18,7 @@
 
 #### Defined in
 
-[types.ts:3](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L3)
-
----
-
-### meta?
-
-> `optional` **meta**: `TMeta`
-
-#### Defined in
-
-[types.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L5)
+[src/types.ts:6](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L6)
 
 ---
 
@@ -40,7 +28,7 @@
 
 #### Defined in
 
-[types.ts:2](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L2)
+[src/types.ts:4](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L4)
 
 ---
 
@@ -50,4 +38,14 @@
 
 #### Defined in
 
-[types.ts:4](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L4)
+[src/types.ts:7](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L7)
+
+---
+
+### version?
+
+> `optional` **version**: `number`
+
+#### Defined in
+
+[src/types.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L5)

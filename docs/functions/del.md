@@ -6,14 +6,14 @@
 
 # Function: del()
 
-> **del**(`storeInfo`, `keys`): `Promise`\<`void`\>
+> **del**(`storeToken`, `keys`): `Promise`\<`void`\>
 
 ## Parameters
 
-| Parameter   | Type                                                                                           |
-| ----------- | ---------------------------------------------------------------------------------------------- |
-| `storeInfo` | [`GetSetValStoreInfo`](../interfaces/GetSetValStoreInfo.md)\<`Record`\<`string`, `unknown`\>\> |
-| `keys`      | `string`[]                                                                                     |
+| Parameter    | Type                                                          |
+| ------------ | ------------------------------------------------------------- |
+| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
+| `keys`       | `string`[]                                                    |
 
 ## Returns
 
@@ -21,4 +21,4 @@
 
 ## Defined in
 
-[del.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/del.ts#L5)
+[src/del.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/del.ts#L5)

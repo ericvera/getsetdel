@@ -2,11 +2,11 @@
 
 ---
 
-[getsetdel](../README.md) / get
+[getsetdel](../README.md) / entries
 
-# Function: get()
+# Function: entries()
 
-> **get**\<`T`\>(`storeToken`, `keys`): `Promise`\<`T`[]\>
+> **entries**\<`T`\>(`storeToken`): `Promise`\<[`string`, `T`][]\>
 
 ## Type Parameters
 
@@ -19,12 +19,11 @@
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
 | `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
-| `keys`       | `string`[]                                                    |
 
 ## Returns
 
-`Promise`\<`T`[]\>
+`Promise`\<[`string`, `T`][]\>
 
 ## Defined in
 
-[src/get.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/get.ts#L5)
+[src/entries.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/entries.ts#L5)

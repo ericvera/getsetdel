@@ -6,7 +6,7 @@
 
 # Function: set()
 
-> **set**\<`T`\>(`storeInfo`, `entries`): `Promise`\<`void`\>
+> **set**\<`T`\>(`storeToken`, `entries`): `Promise`\<`void`\>
 
 ## Type Parameters
 
@@ -16,10 +16,10 @@
 
 ## Parameters
 
-| Parameter   | Type                                                                                           |
-| ----------- | ---------------------------------------------------------------------------------------------- |
-| `storeInfo` | [`GetSetValStoreInfo`](../interfaces/GetSetValStoreInfo.md)\<`Record`\<`string`, `unknown`\>\> |
-| `entries`   | [`string`, `T`][]                                                                              |
+| Parameter    | Type                                                          |
+| ------------ | ------------------------------------------------------------- |
+| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
+| `entries`    | [`string`, `T`][]                                             |
 
 ## Returns
 
@@ -27,4 +27,4 @@
 
 ## Defined in
 
-[set.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/set.ts#L5)
+[src/set.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/set.ts#L5)
