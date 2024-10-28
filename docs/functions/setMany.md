@@ -9,7 +9,7 @@
 > **setMany**\<`T`\>(`storeToken`, `entries`): `Promise`\<`void`\>
 
 First checks that the store has not been reset by another instance. If the
-store has been reset, the function throws a GetSetValResetError. If the store
+store has been reset, the function throws a GetSetDelResetError. If the store
 has not been reset, the function sets the entries in the store.
 
 ## Type Parameters
@@ -22,7 +22,7 @@ has not been reset, the function sets the entries in the store.
 
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
-| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
+| `storeToken` | [`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md) |
 | `entries`    | [`string`, `T`][]                                             |
 
 ## Returns

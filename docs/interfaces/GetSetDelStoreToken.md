@@ -2,9 +2,9 @@
 
 ---
 
-[getsetdel](../README.md) / GetSetValStoreToken
+[getsetdel](../README.md) / GetSetDelStoreToken
 
-# Interface: GetSetValStoreToken
+# Interface: GetSetDelStoreToken
 
 Token that keeps track of the database name and store as well as information
 that ensures the store is up to date.

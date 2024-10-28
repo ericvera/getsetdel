@@ -1,13 +1,13 @@
-import { GetSetValResetError } from './GetSetValResetError.js'
+import { GetSetDelResetError } from './GetSetDelResetError.js'
 
 /**
- * Handles errors thrown by GetSetVal functions. If the error is a
- * GetSetValResetError, the function calls onResetError. If the error is not a
- * GetSetValResetError, the function rethrows the error.
+ * Handles errors thrown by GetSetDel functions. If the error is a
+ * GetSetDelResetError, the function calls onResetError. If the error is not a
+ * GetSetDelResetError, the function rethrows the error.
  */
 export const handleResetError =
   (onResetError: () => Promise<void>) => async (error: unknown) => {
-    if (error instanceof GetSetValResetError) {
+    if (error instanceof GetSetDelResetError) {
       await onResetError()
     } else {
       throw error

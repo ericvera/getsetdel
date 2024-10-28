@@ -6,13 +6,13 @@
 
 ## Classes
 
-- [GetSetValResetError](classes/GetSetValResetError.md)
+- [GetSetDelResetError](classes/GetSetDelResetError.md)
 
 ## Interfaces
 
-- [GetSetValStoreInfo](interfaces/GetSetValStoreInfo.md)
-- [GetSetValStoreInfoData](interfaces/GetSetValStoreInfoData.md)
-- [GetSetValStoreToken](interfaces/GetSetValStoreToken.md)
+- [GetSetDelStoreInfo](interfaces/GetSetDelStoreInfo.md)
+- [GetSetDelStoreInfoData](interfaces/GetSetDelStoreInfoData.md)
+- [GetSetDelStoreToken](interfaces/GetSetDelStoreToken.md)
 
 ## Functions
 

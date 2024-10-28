@@ -9,14 +9,14 @@
 > **del**(`storeToken`, `key`): `Promise`\<`void`\>
 
 First checks that the store has not been reset by another instance. If the
-store has been reset, the function throws a GetSetValResetError. If the store
+store has been reset, the function throws a GetSetDelResetError. If the store
 has not been reset, the function deletes the key from the store.
 
 ## Parameters
 
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
-| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
+| `storeToken` | [`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md) |
 | `key`        | `string`                                                      |
 
 ## Returns

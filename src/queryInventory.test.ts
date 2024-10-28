@@ -35,9 +35,9 @@ it('works when there are entries in inventory (no parameters)', async () => {
     [
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-private-db-1",
+        "dbName": "getsetdel-private-db-1",
         "store": Store {
-          "dbName": "getsetval-private-db-1",
+          "dbName": "getsetdel-private-db-1",
           "storeName": "store",
         },
         "tags": [
@@ -47,9 +47,9 @@ it('works when there are entries in inventory (no parameters)', async () => {
       },
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-private-db-2",
+        "dbName": "getsetdel-private-db-2",
         "store": Store {
-          "dbName": "getsetval-private-db-2",
+          "dbName": "getsetdel-private-db-2",
           "storeName": "store",
         },
         "tags": [
@@ -59,9 +59,9 @@ it('works when there are entries in inventory (no parameters)', async () => {
       },
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-all-details-db--000",
+        "dbName": "getsetdel-all-details-db--000",
         "store": Store {
-          "dbName": "getsetval-all-details-db--000",
+          "dbName": "getsetdel-all-details-db--000",
           "storeName": "store",
         },
         "tags": [
@@ -104,9 +104,9 @@ it('works when there are entries in inventory (with tags) and there are matches'
     [
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-private-db-1",
+        "dbName": "getsetdel-private-db-1",
         "store": Store {
-          "dbName": "getsetval-private-db-1",
+          "dbName": "getsetdel-private-db-1",
           "storeName": "store",
         },
         "tags": [
@@ -116,9 +116,9 @@ it('works when there are entries in inventory (with tags) and there are matches'
       },
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-private-db-2",
+        "dbName": "getsetdel-private-db-2",
         "store": Store {
-          "dbName": "getsetval-private-db-2",
+          "dbName": "getsetdel-private-db-2",
           "storeName": "store",
         },
         "tags": [
@@ -128,9 +128,9 @@ it('works when there are entries in inventory (with tags) and there are matches'
       },
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-all-details-db--000",
+        "dbName": "getsetdel-all-details-db--000",
         "store": Store {
-          "dbName": "getsetval-all-details-db--000",
+          "dbName": "getsetdel-all-details-db--000",
           "storeName": "store",
         },
         "tags": [
@@ -161,17 +161,17 @@ it('works when there are entries in inventory (with name) and there are matches'
     [
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-info-db--000",
+        "dbName": "getsetdel-info-db--000",
         "store": Store {
-          "dbName": "getsetval-info-db--000",
+          "dbName": "getsetdel-info-db--000",
           "storeName": "store",
         },
       },
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-info-db--111",
+        "dbName": "getsetdel-info-db--111",
         "store": Store {
-          "dbName": "getsetval-info-db--111",
+          "dbName": "getsetdel-info-db--111",
           "storeName": "store",
         },
       },
@@ -197,9 +197,9 @@ it('works when there are entries in inventory (with tags) and there are matches'
     [
       {
         "creation": 1732194735000,
-        "dbName": "getsetval-all-details-db--000",
+        "dbName": "getsetdel-all-details-db--000",
         "store": Store {
-          "dbName": "getsetval-all-details-db--000",
+          "dbName": "getsetdel-all-details-db--000",
           "storeName": "store",
         },
         "tags": [

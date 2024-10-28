@@ -16,7 +16,7 @@ Features:
 
 ## Design
 
-GetSetVal is a key-value store with an small inventory layer on top of it.
+GetSetDel is a key-value store with an small inventory layer on top of it.
 
 It choses clearing the store and hydrating it from scratch over dealing with complex data migrations. This is enabled by the inventory layer which keeps track of details that would invalidate the data (data/schema version or tags) as well as custom metadata that you may need (e.g. last sync timestamp) to keep the data up to date.
 
@@ -29,7 +29,7 @@ When creating a store (via `createStore`), you can provide an optional `version`
 Instead of dealing with data migrations, we just get rid of all the data and start over. This happens in two ways:
 
 1. **During store creation (i.e. `createStore`):** At this time, if the data is invalidated, it is simply cleared (all data removed and inventory entry removed including all metadata).
-2. **During calls to all data access/modification methods (e.g. `get`, `set`, `del`, `entries`, etc.):** At this time, if the data is invalidated, it will throw a `GetSetValResetError` exception which you can handle by clearing your state and starting over from `createStore`.
+2. **During calls to all data access/modification methods (e.g. `get`, `set`, `del`, `entries`, etc.):** At this time, if the data is invalidated, it will throw a `GetSetDelResetError` exception which you can handle by clearing your state and starting over from `createStore`.
 
 ### Alternatives
 
@@ -40,11 +40,11 @@ If you would like to manage all your stores yourself or if you only need a singl
 ### Creating (initializing) a store
 
 ```typescript
-import { createStore } from 'getsetval'
+import { createStore } from 'getsetdel'
 
 // Option 1. Minimum required options
 // This will result in an IndexedDB databased named
-// 'getsetval-storename' with a store called 'store'
+// 'getsetdel-storename' with a store called 'store'
 const storeToken = await createStore({
   name: 'store-name',
 })
@@ -52,7 +52,7 @@ const storeToken = await createStore({
 // Option 2. Store with all the options (name is the only
 // required prop)
 // This will result in an IndexedDB databased named
-// 'getsetval-all-options-store--0001' with a store called 'store'
+// 'getsetdel-all-options-store--0001' with a store called 'store'
 const allOptionsStoreToken = await createStore({
   name: 'all-options-store',
   // In case you want to store data about a specific entity (this
@@ -68,7 +68,7 @@ const allOptionsStoreToken = await createStore({
 ### Accessing/deleting data
 
 ```typescript
-import { createStore, del, set } from 'getsetval'
+import { createStore, del, set } from 'getsetdel'
 
 const storeToken = await createStore({
   name: 'store-name',
@@ -105,7 +105,7 @@ await setMetadata(storeToken, {
 
 ### Reset handling
 
-GetSetVal provides a helper method to manage `GetSetValResetError`.
+GetSetDel provides a helper method to manage `GetSetDelResetError`.
 
 ```typescript
 const onStoreError = async () => {

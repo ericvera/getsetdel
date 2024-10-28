@@ -1,14 +1,14 @@
 import { UseStore } from 'idb-keyval'
 
-export interface GetSetValStoreInfo {
+export interface GetSetDelStoreInfo {
   name: string
   version?: number
   key?: string
   tags?: string[]
 }
 
-export interface GetSetValStoreInfoData<TMeta = Record<string, unknown>>
-  extends GetSetValStoreInfo {
+export interface GetSetDelStoreInfoData<TMeta = Record<string, unknown>>
+  extends GetSetDelStoreInfo {
   /**
    * Timestamp of when the store was created.
    */
@@ -21,7 +21,7 @@ export interface GetSetValStoreInfoData<TMeta = Record<string, unknown>>
  * Token that keeps track of the database name and store as well as information
  * that ensures the store is up to date.
  */
-export interface GetSetValStoreToken {
+export interface GetSetDelStoreToken {
   /**
    * Name of the IndexedDB database that is used to store the data.
    */

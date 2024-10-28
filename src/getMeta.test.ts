@@ -20,7 +20,7 @@ it('throws if store needs to be reset (due to creation time)', async () => {
 
   // Test
   await expect(getMeta(db)).rejects.toThrowErrorMatchingInlineSnapshot(
-    `[Error: A reset of the store 'getsetval-all-details-db--000' is required. (Reason: creation time mismatch)]`,
+    `[Error: A reset of the store 'getsetdel-all-details-db--000' is required. (Reason: creation time mismatch)]`,
   )
 })
 

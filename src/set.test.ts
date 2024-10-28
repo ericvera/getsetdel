@@ -9,12 +9,12 @@ it('can set single item (key did not exist before)', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-public-db": "{"name":"public-db","creation":1732194735000}",
+          "getsetdel-public-db": "{"name":"public-db","creation":1732194735000}",
         },
       },
-      "getsetval-public-db": {
+      "getsetdel-public-db": {
         "store": {
           "some-key-1": "{"message":"hello 1"}",
         },
@@ -30,15 +30,15 @@ it('can set multiple item', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-all-details-db--000": {
+      "getsetdel-all-details-db--000": {
         "store": {
           "some-key-1": "{"message":"hello 1"}",
           "some-key-2": "{"message":"hello 2"}",
         },
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000}",
         },
       },
     }
@@ -59,15 +59,15 @@ it('can set multiple items after they are already set and does not clear meta', 
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-all-details-db--000": {
+      "getsetdel-all-details-db--000": {
         "store": {
           "some-key-1": "{"message":"hello key 1 v2"}",
           "some-key-2": "{"message":"hello key 2 v1"}",
         },
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
         },
       },
     }

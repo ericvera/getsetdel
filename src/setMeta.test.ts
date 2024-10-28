@@ -20,7 +20,7 @@ it('throws if store version does not match inventory', async () => {
   await expect(
     setMeta(db, { someMeta: 'some-meta' }),
   ).rejects.toThrowErrorMatchingInlineSnapshot(
-    `[Error: A reset of the store 'getsetval-all-details-db--000' is required. (Reason: version mismatch)]`,
+    `[Error: A reset of the store 'getsetdel-all-details-db--000' is required. (Reason: version mismatch)]`,
   )
 })
 
@@ -33,12 +33,12 @@ it('can set meta on a non-existing store', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-all-details-db--000": {
+      "getsetdel-all-details-db--000": {
         "store": {},
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
         },
       },
     }
@@ -53,16 +53,16 @@ it('can set meta on an existing store', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-all-details-db--000": {
+      "getsetdel-all-details-db--000": {
         "store": {},
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
-          "getsetval-public-db": "{"name":"public-db","creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-public-db": "{"name":"public-db","creation":1732194735000}",
         },
       },
-      "getsetval-public-db": {
+      "getsetdel-public-db": {
         "store": {
           "some-key-1": "{"message":"hello 1"}",
         },
@@ -84,16 +84,16 @@ it('can set meta multiple times which overwrites the previous one', async () => 
   // Expect: only the latest meta is stored
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-info-db--111": {
+      "getsetdel-info-db--111": {
         "store": {},
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-info-db--111": "{"name":"info-db","key":"111","version":0,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
-          "getsetval-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000,"meta":{"other":456}}",
+          "getsetdel-info-db--111": "{"name":"info-db","key":"111","version":0,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000,"meta":{"other":456}}",
         },
       },
-      "getsetval-private-db-2": {
+      "getsetdel-private-db-2": {
         "store": {},
       },
     }

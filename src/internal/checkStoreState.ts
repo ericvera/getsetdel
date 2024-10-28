@@ -1,6 +1,6 @@
 import { get } from 'idb-keyval'
-import { GetSetValResetError } from '../GetSetValResetError.js'
-import { GetSetValStoreInfoData, GetSetValStoreToken } from '../types.js'
+import { GetSetDelResetError } from '../GetSetDelResetError.js'
+import { GetSetDelStoreInfoData, GetSetDelStoreToken } from '../types.js'
 import { arraysContainSameValues } from './arraysContainSameValues.js'
 import { createInventoryStore } from './constants.js'
 
@@ -10,14 +10,14 @@ import { createInventoryStore } from './constants.js'
  * the ones defined in the inventory.
  * @param storeToken Token that represents the store and the details at the time
  * of creation.
- * @throws {GetSetValResetError} If the store needs to be reset.
+ * @throws {GetSetDelResetError} If the store needs to be reset.
  * @returns The store details.
  */
 export const checkStoreState = async <TMeta = Record<string, unknown>>(
-  storeToken: GetSetValStoreToken,
+  storeToken: GetSetDelStoreToken,
 ) => {
   // Get current inventory info
-  const storeDetails = await get<GetSetValStoreInfoData<TMeta>>(
+  const storeDetails = await get<GetSetDelStoreInfoData<TMeta>>(
     storeToken.dbName,
     createInventoryStore(),
   )
@@ -25,22 +25,22 @@ export const checkStoreState = async <TMeta = Record<string, unknown>>(
   // Check if the version or the tags are different
   if (!storeDetails) {
     // Reset required
-    throw new GetSetValResetError(storeToken.dbName, 'store was deleted')
+    throw new GetSetDelResetError(storeToken.dbName, 'store was deleted')
   }
 
   if (storeDetails.version !== storeToken.version) {
     // Reset required
-    throw new GetSetValResetError(storeToken.dbName, 'version mismatch')
+    throw new GetSetDelResetError(storeToken.dbName, 'version mismatch')
   }
 
   if (storeDetails.creation !== storeToken.creation) {
     // Reset required
-    throw new GetSetValResetError(storeToken.dbName, 'creation time mismatch')
+    throw new GetSetDelResetError(storeToken.dbName, 'creation time mismatch')
   }
 
   if (!arraysContainSameValues(storeDetails.tags, storeToken.tags)) {
     // Reset required
-    throw new GetSetValResetError(storeToken.dbName, 'tags mismatch')
+    throw new GetSetDelResetError(storeToken.dbName, 'tags mismatch')
   }
 
   return storeDetails

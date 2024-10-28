@@ -6,7 +6,7 @@
 
 # Function: createStore()
 
-> **createStore**(`storeInfo`): `Promise`\<[`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md)\>
+> **createStore**(`storeInfo`): `Promise`\<[`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md)\>
 
 If the store exists, the function checks if the store needs to be reset. A
 reset happens if the version or the tags provided in storeInfo parameter are
@@ -15,18 +15,18 @@ required, the function clears all data as well as its details stored in the
 inventory. If the store does not exist, or if a reset was performed, the
 function creates a new store and adds it to the inventory including a new
 creation time. A token contianing the store reference and the creation time
-is returned which is to be passed to all subsequent GetSetVal functions to
+is returned which is to be passed to all subsequent GetSetDel functions to
 ensure that the underlying store has not been reset.
 
 ## Parameters
 
 | Parameter   | Type                                                        | Description                  |
 | ----------- | ----------------------------------------------------------- | ---------------------------- |
-| `storeInfo` | [`GetSetValStoreInfo`](../interfaces/GetSetValStoreInfo.md) | Information about the store. |
+| `storeInfo` | [`GetSetDelStoreInfo`](../interfaces/GetSetDelStoreInfo.md) | Information about the store. |
 
 ## Returns
 
-`Promise`\<[`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md)\>
+`Promise`\<[`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md)\>
 
 ## Defined in
 

@@ -15,7 +15,7 @@ it("does not throw if the store tags don't match", async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {},
       },
     }
@@ -38,12 +38,12 @@ it('can clear multiple stores', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-public-db": "{"name":"public-db","creation":1732194735000}",
+          "getsetdel-public-db": "{"name":"public-db","creation":1732194735000}",
         },
       },
-      "getsetval-public-db": {
+      "getsetdel-public-db": {
         "store": {},
       },
     }
@@ -59,7 +59,7 @@ it('does not throw if the store does not exist', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {},
       },
     }

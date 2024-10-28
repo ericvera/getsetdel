@@ -6,7 +6,7 @@
 
 # Function: queryInventory()
 
-> **queryInventory**(`query`): `Promise`\<[`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md)[]\>
+> **queryInventory**(`query`): `Promise`\<[`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md)[]\>
 
 Queries the inventory for stores that match the query.
 
@@ -18,7 +18,7 @@ Queries the inventory for stores that match the query.
 
 ## Returns
 
-`Promise`\<[`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md)[]\>
+`Promise`\<[`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md)[]\>
 
 An array of tokens containing the store reference and creation time.
 

@@ -14,7 +14,7 @@ it("throws if the store tags don't match", async () => {
   await expect(
     delMany(db, ['key1']),
   ).rejects.toThrowErrorMatchingInlineSnapshot(
-    `[Error: A reset of the store 'getsetval-private-db-2' is required. (Reason: tags mismatch)]`,
+    `[Error: A reset of the store 'getsetdel-private-db-2' is required. (Reason: tags mismatch)]`,
   )
 })
 
@@ -31,12 +31,12 @@ it('can delete a key from a store', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
+          "getsetdel-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
         },
       },
-      "getsetval-private-db-2": {
+      "getsetdel-private-db-2": {
         "store": {
           "key2": "{"message":"world"}",
         },
@@ -63,19 +63,19 @@ it('does not affect other stores with same keys', async () => {
   await delMany(db1, ['key1', 'key2'])
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-all-details-db--000": {
+      "getsetdel-all-details-db--000": {
         "store": {
           "key1": "{"message":"hello"}",
           "key2": "{"message":"world"}",
         },
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000}",
-          "getsetval-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000}",
+          "getsetdel-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
         },
       },
-      "getsetval-private-db-2": {
+      "getsetdel-private-db-2": {
         "store": {},
       },
     }
@@ -94,12 +94,12 @@ it('does not throw is a key does not exist', async () => {
   await delMany(db, ['key3'])
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
+          "getsetdel-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
         },
       },
-      "getsetval-private-db-2": {
+      "getsetdel-private-db-2": {
         "store": {
           "key1": "{"message":"hello"}",
           "key2": "{"message":"world"}",

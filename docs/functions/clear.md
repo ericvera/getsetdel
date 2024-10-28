@@ -16,7 +16,7 @@ of the store.
 
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
-| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
+| `storeToken` | [`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md) |
 
 ## Returns
 

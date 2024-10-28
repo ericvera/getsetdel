@@ -11,7 +11,7 @@ it('throws if the db has been deleted', async () => {
 
   // Test
   await expect(entries(db)).rejects.toMatchInlineSnapshot(
-    `[Error: A reset of the store 'getsetval-private-db-1' is required. (Reason: store was deleted)]`,
+    `[Error: A reset of the store 'getsetdel-private-db-1' is required. (Reason: store was deleted)]`,
   )
 })
 

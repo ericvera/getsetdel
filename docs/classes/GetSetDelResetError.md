@@ -2,9 +2,9 @@
 
 ---
 
-[getsetdel](../README.md) / GetSetValResetError
+[getsetdel](../README.md) / GetSetDelResetError
 
-# Class: GetSetValResetError
+# Class: GetSetDelResetError
 
 Error thrown when a reset of the store is required. The error message
 explains why the store needs to be reset.
@@ -15,9 +15,9 @@ explains why the store needs to be reset.
 
 ## Constructors
 
-### new GetSetValResetError()
+### new GetSetDelResetError()
 
-> **new GetSetValResetError**(`dbName`, `reason`): [`GetSetValResetError`](GetSetValResetError.md)
+> **new GetSetDelResetError**(`dbName`, `reason`): [`GetSetDelResetError`](GetSetDelResetError.md)
 
 #### Parameters
 
@@ -28,7 +28,7 @@ explains why the store needs to be reset.
 
 #### Returns
 
-[`GetSetValResetError`](GetSetValResetError.md)
+[`GetSetDelResetError`](GetSetDelResetError.md)
 
 #### Overrides
 
@@ -36,7 +36,7 @@ explains why the store needs to be reset.
 
 #### Defined in
 
-[src/GetSetValResetError.ts:6](https://github.com/ericvera/getsetdel/blob/main/src/GetSetValResetError.ts#L6)
+[src/GetSetDelResetError.ts:6](https://github.com/ericvera/getsetdel/blob/main/src/GetSetDelResetError.ts#L6)
 
 ## Properties
 

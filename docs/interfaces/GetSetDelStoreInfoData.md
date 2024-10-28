@@ -2,13 +2,13 @@
 
 ---
 
-[getsetdel](../README.md) / GetSetValStoreInfoData
+[getsetdel](../README.md) / GetSetDelStoreInfoData
 
-# Interface: GetSetValStoreInfoData\<TMeta\>
+# Interface: GetSetDelStoreInfoData\<TMeta\>
 
 ## Extends
 
-- [`GetSetValStoreInfo`](GetSetValStoreInfo.md)
+- [`GetSetDelStoreInfo`](GetSetDelStoreInfo.md)
 
 ## Type Parameters
 
@@ -36,7 +36,7 @@ Timestamp of when the store was created.
 
 #### Inherited from
 
-[`GetSetValStoreInfo`](GetSetValStoreInfo.md).[`key`](GetSetValStoreInfo.md#key)
+[`GetSetDelStoreInfo`](GetSetDelStoreInfo.md).[`key`](GetSetDelStoreInfo.md#key)
 
 #### Defined in
 
@@ -60,7 +60,7 @@ Timestamp of when the store was created.
 
 #### Inherited from
 
-[`GetSetValStoreInfo`](GetSetValStoreInfo.md).[`name`](GetSetValStoreInfo.md#name)
+[`GetSetDelStoreInfo`](GetSetDelStoreInfo.md).[`name`](GetSetDelStoreInfo.md#name)
 
 #### Defined in
 
@@ -74,7 +74,7 @@ Timestamp of when the store was created.
 
 #### Inherited from
 
-[`GetSetValStoreInfo`](GetSetValStoreInfo.md).[`tags`](GetSetValStoreInfo.md#tags)
+[`GetSetDelStoreInfo`](GetSetDelStoreInfo.md).[`tags`](GetSetDelStoreInfo.md#tags)
 
 #### Defined in
 
@@ -88,7 +88,7 @@ Timestamp of when the store was created.
 
 #### Inherited from
 
-[`GetSetValStoreInfo`](GetSetValStoreInfo.md).[`version`](GetSetValStoreInfo.md#version)
+[`GetSetDelStoreInfo`](GetSetDelStoreInfo.md).[`version`](GetSetDelStoreInfo.md#version)
 
 #### Defined in
 

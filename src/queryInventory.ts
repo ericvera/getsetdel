@@ -1,7 +1,7 @@
 import { createStore, entries } from 'idb-keyval'
 import { createInventoryStore, StoreName } from './internal/constants.js'
 import { getDBName } from './internal/getDBName.js'
-import { GetSetValStoreInfoData, GetSetValStoreToken } from './types.js'
+import { GetSetDelStoreInfoData, GetSetDelStoreToken } from './types.js'
 
 interface GetStoresInfoQuery {
   name?: string
@@ -15,9 +15,9 @@ interface GetStoresInfoQuery {
  */
 export const queryInventory = async (
   query: GetStoresInfoQuery = {},
-): Promise<GetSetValStoreToken[]> => {
+): Promise<GetSetDelStoreToken[]> => {
   // Get all the store entries in inventory
-  let resultStoresInfo = await entries<string, GetSetValStoreInfoData>(
+  let resultStoresInfo = await entries<string, GetSetDelStoreInfoData>(
     createInventoryStore(),
   )
 
@@ -44,8 +44,8 @@ export const queryInventory = async (
     const dbName = getDBName(storeInfo)
     const { version, tags, creation } = storeInfo
 
-    // Create GetSetVal token
-    const token: GetSetValStoreToken = {
+    // Create GetSetDel token
+    const token: GetSetDelStoreToken = {
       dbName,
       creation,
       store: createStore(dbName, StoreName),

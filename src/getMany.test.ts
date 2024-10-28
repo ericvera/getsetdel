@@ -11,7 +11,7 @@ it('throws if the version is different', async () => {
 
   // Test
   await expect(getMany(db, ['key-1'])).rejects.toMatchInlineSnapshot(
-    `[Error: A reset of the store 'getsetval-private-db-1' is required. (Reason: version mismatch)]`,
+    `[Error: A reset of the store 'getsetdel-private-db-1' is required. (Reason: version mismatch)]`,
   )
 })
 

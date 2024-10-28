@@ -20,12 +20,12 @@ it('clears store if version is different', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-all-details-db--000": {
+      "getsetdel-all-details-db--000": {
         "store": {},
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":2,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":2,"creation":1732194735000}",
         },
       },
     }
@@ -45,12 +45,12 @@ it('clears store if tags are different', async () => {
   // Expect no keys and tags updated to tag1 and tag2
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-all-details-db--000": {
+      "getsetdel-all-details-db--000": {
         "store": {},
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["tag1","tag2"],"version":1,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["tag1","tag2"],"version":1,"creation":1732194735000}",
         },
       },
     }
@@ -62,12 +62,12 @@ it('works when all data is valid and the store is new', async () => {
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
-      "getsetval-all-details-db--000": {
+      "getsetdel-all-details-db--000": {
         "store": {},
       },
-      "getsetval-inventory": {
+      "getsetdel-inventory": {
         "store": {
-          "getsetval-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000}",
         },
       },
     }

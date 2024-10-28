@@ -1,5 +1,5 @@
 import { expect, it, vi } from 'vitest'
-import { GetSetValResetError, handleResetError } from './index.js'
+import { GetSetDelResetError, handleResetError } from './index.js'
 
 it('calls the handler if the error is a reset error', async () => {
   const f = async () => {
@@ -16,7 +16,7 @@ it('calls the handler if the error is a reset error', async () => {
 it('rethrows the error if it is not a reset error', async () => {
   const f = async () => {
     return Promise.reject(
-      new GetSetValResetError('some-db-name', 'some reason'),
+      new GetSetDelResetError('some-db-name', 'some reason'),
     )
   }
 

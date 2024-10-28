@@ -4,9 +4,9 @@ import { clearStore } from './internal/clearStore.js'
 import { createInventoryStore, StoreName } from './internal/constants.js'
 import { getDBName } from './internal/getDBName.js'
 import {
-  GetSetValStoreInfo,
-  GetSetValStoreInfoData,
-  GetSetValStoreToken,
+  GetSetDelStoreInfo,
+  GetSetDelStoreInfoData,
+  GetSetDelStoreToken,
 } from './types.js'
 
 /**
@@ -17,16 +17,16 @@ import {
  * inventory. If the store does not exist, or if a reset was performed, the
  * function creates a new store and adds it to the inventory including a new
  * creation time. A token contianing the store reference and the creation time
- * is returned which is to be passed to all subsequent GetSetVal functions to
+ * is returned which is to be passed to all subsequent GetSetDel functions to
  * ensure that the underlying store has not been reset.
  * @param storeInfo Information about the store.
  */
-export const createStore = async (storeInfo: GetSetValStoreInfo) => {
+export const createStore = async (storeInfo: GetSetDelStoreInfo) => {
   const dbName = getDBName(storeInfo)
   const inventoryStore = createInventoryStore()
 
   // Get local inventory details
-  let storeDetails = await get<GetSetValStoreInfoData>(
+  let storeDetails = await get<GetSetDelStoreInfoData>(
     dbName,
     createInventoryStore(),
   )
@@ -58,8 +58,8 @@ export const createStore = async (storeInfo: GetSetValStoreInfo) => {
   // Create IDB store
   const store = idbCreateStore(dbName, StoreName)
 
-  // Create GetSetVal token
-  const token: GetSetValStoreToken = {
+  // Create GetSetDel token
+  const token: GetSetDelStoreToken = {
     dbName,
     store,
     creation: storeDetails.creation,

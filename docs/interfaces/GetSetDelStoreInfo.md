@@ -2,13 +2,13 @@
 
 ---
 
-[getsetdel](../README.md) / GetSetValStoreInfo
+[getsetdel](../README.md) / GetSetDelStoreInfo
 
-# Interface: GetSetValStoreInfo
+# Interface: GetSetDelStoreInfo
 
 ## Extended by
 
-- [`GetSetValStoreInfoData`](GetSetValStoreInfoData.md)
+- [`GetSetDelStoreInfoData`](GetSetDelStoreInfoData.md)
 
 ## Properties
 

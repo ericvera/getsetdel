@@ -8,9 +8,9 @@
 
 > **handleResetError**(`onResetError`): (`error`) => `Promise`\<`void`\>
 
-Handles errors thrown by GetSetVal functions. If the error is a
-GetSetValResetError, the function calls onResetError. If the error is not a
-GetSetValResetError, the function rethrows the error.
+Handles errors thrown by GetSetDel functions. If the error is a
+GetSetDelResetError, the function calls onResetError. If the error is not a
+GetSetDelResetError, the function rethrows the error.
 
 ## Parameters
 

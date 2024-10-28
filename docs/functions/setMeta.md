@@ -9,7 +9,7 @@
 > **setMeta**(`storeToken`, `meta`): `Promise`\<`void`\>
 
 First checks that the store has not been reset by another instance. If the
-store has been reset, the function throws a GetSetValResetError. If the store
+store has been reset, the function throws a GetSetDelResetError. If the store
 has not been reset, the function sets the meta of the store. WARNING: It will
 replace the existing meta with the new meta rather than merging the two.
 
@@ -17,7 +17,7 @@ replace the existing meta with the new meta rather than merging the two.
 
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
-| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
+| `storeToken` | [`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md) |
 | `meta`       | `Record`\<`string`, `unknown`\>                               |
 
 ## Returns
