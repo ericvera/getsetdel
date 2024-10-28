@@ -6,14 +6,18 @@
 
 # Function: del()
 
-> **del**(`storeToken`, `keys`): `Promise`\<`void`\>
+> **del**(`storeToken`, `key`): `Promise`\<`void`\>
+
+First checks that the store has not been reset by another instance. If the
+store has been reset, the function throws a GetSetValResetError. If the store
+has not been reset, the function deletes the key from the store.
 
 ## Parameters
 
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
 | `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
-| `keys`       | `string`[]                                                    |
+| `key`        | `string`                                                      |
 
 ## Returns
 
@@ -21,4 +25,4 @@
 
 ## Defined in
 
-[src/del.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/del.ts#L5)
+[src/del.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/del.ts#L10)

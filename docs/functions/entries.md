@@ -8,6 +8,10 @@
 
 > **entries**\<`T`\>(`storeToken`): `Promise`\<[`string`, `T`][]\>
 
+First checks that the store has not been reset by another instance. If the
+store has been reset, the function throws a GetSetValResetError. If the store
+has not been reset, the function returns all key-value pairs in the store.
+
 ## Type Parameters
 
 | Type Parameter |
@@ -26,4 +30,4 @@
 
 ## Defined in
 
-[src/entries.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/entries.ts#L5)
+[src/entries.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/entries.ts#L10)

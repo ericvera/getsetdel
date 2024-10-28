@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest'
 import { testGetMockIndexedDBData } from './__mocks__/idb-keyval.js'
 import { AllDetailsDB, PrivateDB2 } from './__test__/constants.js'
-import { createStore, del, setMany } from './index.js'
+import { createStore, delMany, setMany } from './index.js'
 
 it("throws if the store tags don't match", async () => {
   // Test prep: create a store with tags ['private']
@@ -11,7 +11,9 @@ it("throws if the store tags don't match", async () => {
   // of the store
   await createStore({ ...PrivateDB2, tags: ['private', 'public'] })
 
-  await expect(del(db, 'key1')).rejects.toThrowErrorMatchingInlineSnapshot(
+  await expect(
+    delMany(db, ['key1']),
+  ).rejects.toThrowErrorMatchingInlineSnapshot(
     `[Error: A reset of the store 'getsetval-private-db-2' is required. (Reason: tags mismatch)]`,
   )
 })
@@ -25,7 +27,7 @@ it('can delete a key from a store', async () => {
   ])
 
   // Test
-  await del(db, 'key1')
+  await delMany(db, ['key1'])
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
@@ -58,8 +60,7 @@ it('does not affect other stores with same keys', async () => {
   ])
 
   // Test
-  await del(db1, 'key1')
-  await del(db1, 'key2')
+  await delMany(db1, ['key1', 'key2'])
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
       "getsetval-all-details-db--000": {
@@ -90,7 +91,7 @@ it('does not throw is a key does not exist', async () => {
   ])
 
   // Test
-  await del(db, 'key3')
+  await delMany(db, ['key3'])
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
       "getsetval-inventory": {

@@ -6,6 +6,9 @@
 
 # Class: GetSetValResetError
 
+Error thrown when a reset of the store is required. The error message
+explains why the store needs to be reset.
+
 ## Extends
 
 - `Error`
@@ -33,7 +36,7 @@
 
 #### Defined in
 
-[src/GetSetValResetError.ts:2](https://github.com/ericvera/getsetdel/blob/main/src/GetSetValResetError.ts#L2)
+[src/GetSetValResetError.ts:6](https://github.com/ericvera/getsetdel/blob/main/src/GetSetValResetError.ts#L6)
 
 ## Properties
 

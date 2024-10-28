@@ -27,7 +27,7 @@ Timestamp of when the store was created.
 
 > **dbName**: `string`
 
-Name of the IndexedDB database.
+Name of the IndexedDB database that is used to store the data.
 
 #### Defined in
 
@@ -51,7 +51,7 @@ Reference to idb-keyval's store.
 
 > `optional` **tags**: `string`[]
 
-Tags that describe the store.
+Tags that describe the store at the time of creation.
 
 #### Defined in
 
@@ -63,7 +63,7 @@ Tags that describe the store.
 
 > `optional` **version**: `number`
 
-Version of the data/schema.
+Version of the data/schema at the time of creation.
 
 #### Defined in
 

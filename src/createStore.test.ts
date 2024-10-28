@@ -6,14 +6,14 @@ import {
   InfoDBWithKey2,
   PublicDB,
 } from './__test__/constants.js'
-import { createStore, set } from './index.js'
+import { createStore, setMany } from './index.js'
 
 it('clears store if version is different', async () => {
   // Test prep: create a store
   const db = await createStore(AllDetailsDB)
 
   // Test prep: add some data to the store
-  await set(db, [['some-key', { message: 'hello' }]])
+  await setMany(db, [['some-key', { message: 'hello' }]])
 
   // Test
   await createStore({ ...AllDetailsDB, version: 2 })
@@ -37,7 +37,7 @@ it('clears store if tags are different', async () => {
   const db = await createStore(AllDetailsDB)
 
   // Test prep: add some data to the store
-  await set(db, [['some-key', { message: 'hello' }]])
+  await setMany(db, [['some-key', { message: 'hello' }]])
 
   // Test
   await createStore({ ...AllDetailsDB, tags: ['tag1', 'tag2'] })

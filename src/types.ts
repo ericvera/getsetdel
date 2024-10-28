@@ -23,7 +23,7 @@ export interface GetSetValStoreInfoData<TMeta = Record<string, unknown>>
  */
 export interface GetSetValStoreToken {
   /**
-   * Name of the IndexedDB database.
+   * Name of the IndexedDB database that is used to store the data.
    */
   dbName: string
 
@@ -38,12 +38,12 @@ export interface GetSetValStoreToken {
   creation: number
 
   /**
-   * Version of the data/schema.
+   * Version of the data/schema at the time of creation.
    */
   version?: number
 
   /**
-   * Tags that describe the store.
+   * Tags that describe the store at the time of creation.
    */
   tags?: string[]
 }

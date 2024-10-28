@@ -4,7 +4,10 @@ import { createInventoryStore } from './internal/constants.js'
 import { GetSetValStoreToken } from './types.js'
 
 /**
- * Replaces the value of the specified property in the store's meta object.
+ * First checks that the store has not been reset by another instance. If the
+ * store has been reset, the function throws a GetSetValResetError. If the store
+ * has not been reset, the function sets the meta of the store. WARNING: It will
+ * replace the existing meta with the new meta rather than merging the two.
  */
 export const setMeta = async (
   storeToken: GetSetValStoreToken,

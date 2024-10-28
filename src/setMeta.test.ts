@@ -6,7 +6,7 @@ import {
   PrivateDB2,
   PublicDB,
 } from './__test__/constants.js'
-import { createStore, set, setMeta } from './index.js'
+import { createStore, setMany, setMeta } from './index.js'
 
 it('throws if store version does not match inventory', async () => {
   // Test prep: create a store
@@ -47,7 +47,7 @@ it('can set meta on a non-existing store', async () => {
 
 it('can set meta on an existing store', async () => {
   const db1 = await createStore(PublicDB)
-  await set(db1, [['some-key-1', { message: 'hello 1' }]])
+  await setMany(db1, [['some-key-1', { message: 'hello 1' }]])
   const db2 = await createStore(AllDetailsDB)
   await setMeta(db2, { someMeta: 'some-meta', other: 123 })
 

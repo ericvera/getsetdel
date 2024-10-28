@@ -6,20 +6,19 @@
 
 # Function: set()
 
-> **set**\<`T`\>(`storeToken`, `entries`): `Promise`\<`void`\>
+> **set**(`storeToken`, `key`, `value`): `Promise`\<`void`\>
 
-## Type Parameters
-
-| Type Parameter |
-| -------------- |
-| `T`            |
+First checks that the store has not been reset by another instance. If the
+store has been reset, the function throws a GetSetValResetError. If the store
+has not been reset, the function sets the value of the key in the store.
 
 ## Parameters
 
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
 | `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
-| `entries`    | [`string`, `T`][]                                             |
+| `key`        | `string`                                                      |
+| `value`      | `unknown`                                                     |
 
 ## Returns
 
@@ -27,4 +26,4 @@
 
 ## Defined in
 
-[src/set.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/set.ts#L5)
+[src/set.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/set.ts#L10)

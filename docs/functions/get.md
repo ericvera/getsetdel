@@ -6,7 +6,11 @@
 
 # Function: get()
 
-> **get**\<`T`\>(`storeToken`, `keys`): `Promise`\<`T`[]\>
+> **get**\<`T`\>(`storeToken`, `key`): `Promise`\<`undefined` \| `T`\>
+
+First checks that the store has not been reset by another instance. If the
+store has been reset, the function throws a GetSetValResetError. If the store
+has not been reset, the function returns the value of the key in the store.
 
 ## Type Parameters
 
@@ -19,12 +23,12 @@
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
 | `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
-| `keys`       | `string`[]                                                    |
+| `key`        | `string`                                                      |
 
 ## Returns
 
-`Promise`\<`T`[]\>
+`Promise`\<`undefined` \| `T`\>
 
 ## Defined in
 
-[src/get.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/get.ts#L5)
+[src/get.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/get.ts#L10)

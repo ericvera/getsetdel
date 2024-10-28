@@ -11,7 +11,7 @@ it('throws if store needs to be reset (due to creation time)', async () => {
   const db = await createStore(AllDetailsDB)
 
   // Test prep: reset store
-  await clear([db])
+  await clear(db)
 
   vi.advanceTimersByTime(1000)
 

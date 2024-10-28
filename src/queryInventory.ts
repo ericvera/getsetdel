@@ -9,6 +9,10 @@ interface GetStoresInfoQuery {
   includesAllTags?: string[]
 }
 
+/**
+ * Queries the inventory for stores that match the query.
+ * @returns An array of tokens containing the store reference and creation time.
+ */
 export const queryInventory = async (
   query: GetStoresInfoQuery = {},
 ): Promise<GetSetValStoreToken[]> => {

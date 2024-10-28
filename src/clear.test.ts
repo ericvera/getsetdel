@@ -11,7 +11,7 @@ it("does not throw if the store tags don't match", async () => {
   // of the store
   await createStore({ ...PrivateDB2, tags: ['private', 'public'] })
 
-  await clear([db])
+  await clear(db)
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
@@ -33,7 +33,8 @@ it('can clear multiple stores', async () => {
   const db3 = await createStore(AllDetailsDB)
 
   // Test
-  await clear([db1, db3])
+  await clear(db1)
+  await clear(db3)
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {
@@ -54,7 +55,7 @@ it('does not throw if the store does not exist', async () => {
   const db = await createStore(PrivateDB2)
 
   // Test
-  await clear([db])
+  await clear(db)
 
   expect(testGetMockIndexedDBData()).toMatchInlineSnapshot(`
     {

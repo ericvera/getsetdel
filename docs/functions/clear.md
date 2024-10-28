@@ -6,17 +6,17 @@
 
 # Function: clear()
 
-> **clear**(`storeTokens`): `Promise`\<`void`\>
+> **clear**(`storeToken`): `Promise`\<`void`\>
 
-Clears all data from the specified stores and removes them from the
+Clears all data from the specified store and removes it from the
 inventory. Since the data is being removed, there is no check about the state
 of the store.
 
 ## Parameters
 
-| Parameter     | Type                                                            |
-| ------------- | --------------------------------------------------------------- |
-| `storeTokens` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md)[] |
+| Parameter    | Type                                                          |
+| ------------ | ------------------------------------------------------------- |
+| `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
 
 ## Returns
 

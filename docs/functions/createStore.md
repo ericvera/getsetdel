@@ -8,11 +8,15 @@
 
 > **createStore**(`storeInfo`): `Promise`\<[`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md)\>
 
-Creates a new store or updates an existing one and returns a token that can
-be used to interact with the store. As part of the creation process, the
-function checks if the store needs to be reset. A reset happens if the
-version or the tags provided in storeInfo are different from the ones defined
-in the inventory.
+If the store exists, the function checks if the store needs to be reset. A
+reset happens if the version or the tags provided in storeInfo parameter are
+different from the ones defined in the stores inventory. If a reset is
+required, the function clears all data as well as its details stored in the
+inventory. If the store does not exist, or if a reset was performed, the
+function creates a new store and adds it to the inventory including a new
+creation time. A token contianing the store reference and the creation time
+is returned which is to be passed to all subsequent GetSetVal functions to
+ensure that the underlying store has not been reset.
 
 ## Parameters
 
@@ -26,4 +30,4 @@ in the inventory.
 
 ## Defined in
 
-[src/createStore.ts:20](https://github.com/ericvera/getsetdel/blob/main/src/createStore.ts#L20)
+[src/createStore.ts:24](https://github.com/ericvera/getsetdel/blob/main/src/createStore.ts#L24)

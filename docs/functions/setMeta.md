@@ -8,7 +8,10 @@
 
 > **setMeta**(`storeToken`, `meta`): `Promise`\<`void`\>
 
-Replaces the value of the specified property in the store's meta object.
+First checks that the store has not been reset by another instance. If the
+store has been reset, the function throws a GetSetValResetError. If the store
+has not been reset, the function sets the meta of the store. WARNING: It will
+replace the existing meta with the new meta rather than merging the two.
 
 ## Parameters
 
@@ -23,4 +26,4 @@ Replaces the value of the specified property in the store's meta object.
 
 ## Defined in
 
-[src/setMeta.ts:9](https://github.com/ericvera/getsetdel/blob/main/src/setMeta.ts#L9)
+[src/setMeta.ts:12](https://github.com/ericvera/getsetdel/blob/main/src/setMeta.ts#L12)

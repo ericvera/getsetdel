@@ -2,26 +2,33 @@
 
 ---
 
-[getsetdel](../README.md) / keys
+[getsetdel](../README.md) / getMany
 
-# Function: keys()
+# Function: getMany()
 
-> **keys**(`storeToken`): `Promise`\<`string`[]\>
+> **getMany**\<`T`\>(`storeToken`, `keys`): `Promise`\<`T`[]\>
 
 First checks that the store has not been reset by another instance. If the
 store has been reset, the function throws a GetSetValResetError. If the store
-has not been reset, the function returns all keys in the store.
+has not been reset, the function returns the values of the keys in the store.
+
+## Type Parameters
+
+| Type Parameter |
+| -------------- |
+| `T`            |
 
 ## Parameters
 
 | Parameter    | Type                                                          |
 | ------------ | ------------------------------------------------------------- |
 | `storeToken` | [`GetSetValStoreToken`](../interfaces/GetSetValStoreToken.md) |
+| `keys`       | `string`[]                                                    |
 
 ## Returns
 
-`Promise`\<`string`[]\>
+`Promise`\<`T`[]\>
 
 ## Defined in
 
-[src/keys.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/keys.ts#L10)
+[src/getMany.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/getMany.ts#L10)
