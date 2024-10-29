@@ -44,7 +44,7 @@ import { createStore } from 'getsetdel'
 
 // Option 1. Minimum required options
 // This will result in an IndexedDB databased named
-// 'getsetdel-storename' with a store called 'store'
+// 'getsetdel-store-name' with a store called 'store'
 const storeToken = await createStore({
   name: 'store-name',
 })
@@ -113,9 +113,9 @@ const onStoreError = async () => {
   // re-initialize the store by calling `createStore`
 }
 
-// Here is the `version`, `creation` timestamp, or `tags` have
-// change, `onStoreError` is called. In the case of any other
-// the exception is re-thrown.
+// When the `version` prop, `creation` timestamp, or `tags` change,
+// `onStoreError` is called. In the case of any other exception is thrown, the
+// exception is just re-thrown.
 await set(storeToken, 'key', { data: 'hello' }).handleResetError(onStoreError)
 ```
 
