@@ -9,9 +9,13 @@ import { GetSetDelStoreToken } from './types.js'
  * has not been reset, the function sets the meta of the store. WARNING: It will
  * replace the existing meta with the new meta rather than merging the two.
  */
-export const setMeta = async (
+// Disable the no-unnecessary-type-parameters rule because we need to use the
+// type parameter to ensure that the meta object is a valid type (known edge
+// case in the rules documentation).
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
+export const setMeta = async <T>(
   storeToken: GetSetDelStoreToken,
-  meta: Record<string, unknown>,
+  meta: T,
 ): Promise<void> => {
   const storeDetails = await checkStoreState(storeToken)
 
