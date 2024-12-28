@@ -1,4 +1,4 @@
-**getsetdel** • **Docs**
+**getsetdel**
 
 ---
 

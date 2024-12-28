@@ -1,4 +1,4 @@
-[**getsetdel**](../README.md) • **Docs**
+[**getsetdel**](../README.md)
 
 ---
 

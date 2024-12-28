@@ -1,4 +1,4 @@
-[**getsetdel**](../README.md) • **Docs**
+[**getsetdel**](../README.md)
 
 ---
 
@@ -50,7 +50,7 @@ explains why the store needs to be reset.
 
 #### Defined in
 
-node_modules/typescript/lib/lib.es2022.error.d.ts:24
+node_modules/typescript/lib/lib.es2022.error.d.ts:26
 
 ---
 
