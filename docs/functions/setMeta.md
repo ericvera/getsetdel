@@ -32,4 +32,4 @@ replace the existing meta with the new meta rather than merging the two.
 
 ## Defined in
 
-[src/setMeta.ts:16](https://github.com/ericvera/getsetdel/blob/main/src/setMeta.ts#L16)
+[src/setMeta.ts:15](https://github.com/ericvera/getsetdel/blob/main/src/setMeta.ts#L15)
