@@ -38,7 +38,7 @@ it('can set meta on a non-existing store', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"],"meta":{"someMeta":"some-meta","other":123}}",
         },
       },
     }
@@ -58,7 +58,7 @@ it('can set meta on an existing store', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"],"meta":{"someMeta":"some-meta","other":123}}",
           "getsetdel-public-db": "{"name":"public-db","creation":1732194735000}",
         },
       },
@@ -89,8 +89,8 @@ it('can set meta multiple times which overwrites the previous one', async () => 
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-info-db--111": "{"name":"info-db","key":"111","version":0,"creation":1732194735000,"meta":{"someMeta":"some-meta","other":123}}",
-          "getsetdel-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000,"meta":{"other":456}}",
+          "getsetdel-info-db--111": "{"name":"info-db","creation":1732194735000,"key":"111","version":0,"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-private-db-2": "{"name":"private-db-2","creation":1732194735000,"version":1,"tags":["private"],"meta":{"other":456}}",
         },
       },
       "getsetdel-private-db-2": {

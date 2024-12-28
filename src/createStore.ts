@@ -46,9 +46,23 @@ export const createStore = async (storeInfo: GetSetDelStoreInfo) => {
   }
 
   if (!storeDetails) {
+    const { name, key, version, tags } = storeInfo
+
     storeDetails = {
-      ...storeInfo,
+      name,
       creation: Date.now(),
+    }
+
+    if (key !== undefined) {
+      storeDetails.key = key
+    }
+
+    if (version !== undefined) {
+      storeDetails.version = version
+    }
+
+    if (tags !== undefined) {
+      storeDetails.tags = tags
     }
 
     // Add to the inventory

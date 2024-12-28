@@ -25,7 +25,7 @@ it('clears store if version is different', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":2,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":2,"tags":["private","public"]}",
         },
       },
     }
@@ -50,7 +50,7 @@ it('clears store if tags are different', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["tag1","tag2"],"version":1,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["tag1","tag2"]}",
         },
       },
     }
@@ -67,7 +67,7 @@ it('works when all data is valid and the store is new', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"]}",
         },
       },
     }

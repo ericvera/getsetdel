@@ -31,7 +31,7 @@ it('can delete a key from a store', async () => {
     {
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
+          "getsetdel-private-db-2": "{"name":"private-db-2","creation":1732194735000,"version":1,"tags":["private"]}",
         },
       },
       "getsetdel-private-db-2": {
@@ -70,8 +70,8 @@ it('does not affect other stores with same keys', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","key":"000","tags":["private","public"],"version":1,"creation":1732194735000}",
-          "getsetdel-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
+          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"]}",
+          "getsetdel-private-db-2": "{"name":"private-db-2","creation":1732194735000,"version":1,"tags":["private"]}",
         },
       },
       "getsetdel-private-db-2": {
@@ -95,7 +95,7 @@ it('does not throw is a key does not exist', async () => {
     {
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-private-db-2": "{"name":"private-db-2","tags":["private"],"version":1,"creation":1732194735000}",
+          "getsetdel-private-db-2": "{"name":"private-db-2","creation":1732194735000,"version":1,"tags":["private"]}",
         },
       },
       "getsetdel-private-db-2": {
