@@ -6,12 +6,10 @@ export const clearStore = async (dbName: string): Promise<void> => {
   const storeToClear = createStore(dbName, StoreName)
   await clear(storeToClear)
 
-  // Best-effort attempt to delete the database
-  try {
-    indexedDB.deleteDatabase(dbName)
-  } catch {
-    // Do nothing
-  }
+  // NOTE: This may be called as part of resetting a store because for example
+  // the version or tags have changed. In this case, we want to clear the data,
+  // but not delete the database as this will block any further actions on the
+  // database.
 
   // Delete the inventory entry
   await del(dbName, createInventoryStore())
