@@ -60,6 +60,7 @@ it('works when there are entries in inventory (no parameters)', async () => {
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-all-details-db--000",
+        "key": "000",
         "store": Store {
           "dbName": "getsetdel-all-details-db--000",
           "storeName": "store",
@@ -129,6 +130,7 @@ it('works when there are entries in inventory (with tags) and there are matches'
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-all-details-db--000",
+        "key": "000",
         "store": Store {
           "dbName": "getsetdel-all-details-db--000",
           "storeName": "store",
@@ -162,6 +164,7 @@ it('works when there are entries in inventory (with name) and there are matches'
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-info-db--000",
+        "key": "000",
         "store": Store {
           "dbName": "getsetdel-info-db--000",
           "storeName": "store",
@@ -170,6 +173,7 @@ it('works when there are entries in inventory (with name) and there are matches'
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-info-db--111",
+        "key": "111",
         "store": Store {
           "dbName": "getsetdel-info-db--111",
           "storeName": "store",
@@ -198,6 +202,7 @@ it('works when there are entries in inventory (with tags) and there are matches'
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-all-details-db--000",
+        "key": "000",
         "store": Store {
           "dbName": "getsetdel-all-details-db--000",
           "storeName": "store",
@@ -207,6 +212,44 @@ it('works when there are entries in inventory (with tags) and there are matches'
           "public",
         ],
         "version": 1,
+      },
+    ]
+  `)
+})
+
+it('works when there are entries in inventory (with key) and there are matches', async () => {
+  // Test prep: add a few entries to inventory
+  await createStore(PrivateDB1)
+  await createStore(PrivateDB2)
+  await createStore(AllDetailsDB)
+  await createStore(PublicDB)
+  await createStore(InfoDBWithKey1)
+  await createStore(InfoDBWithKey2)
+
+  // Test
+  await expect(
+    queryInventory({
+      name: InfoDBWithKey1.name,
+    }),
+  ).resolves.toMatchInlineSnapshot(`
+    [
+      {
+        "creation": 1732194735000,
+        "dbName": "getsetdel-info-db--000",
+        "key": "000",
+        "store": Store {
+          "dbName": "getsetdel-info-db--000",
+          "storeName": "store",
+        },
+      },
+      {
+        "creation": 1732194735000,
+        "dbName": "getsetdel-info-db--111",
+        "key": "111",
+        "store": Store {
+          "dbName": "getsetdel-info-db--111",
+          "storeName": "store",
+        },
       },
     ]
   `)

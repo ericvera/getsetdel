@@ -90,3 +90,20 @@ it('works when all data is valid and the store already exists', async () => {
 
   expect(before).toEqual(after)
 })
+
+it('works when all data is valid and the store already exists with a different key', async () => {
+  // Test prep: create a couple of other stores
+  await createStore(AllDetailsDB)
+  await createStore(InfoDBWithKey2)
+  await createStore(InfoDBWithKey1)
+  await createStore(PublicDB)
+
+  // Test
+  const before = testGetMockIndexedDBData()
+
+  await createStore({ ...PublicDB, key: '001' })
+
+  const after = testGetMockIndexedDBData()
+
+  expect(before).toEqual(after)
+})

@@ -38,6 +38,11 @@ export interface GetSetDelStoreToken {
   creation: number
 
   /**
+   * Key of the store.
+   */
+  key?: string
+
+  /**
    * Version of the data/schema at the time of creation.
    */
   version?: number

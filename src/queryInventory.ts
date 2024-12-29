@@ -42,7 +42,7 @@ export const queryInventory = async (
 
   return resultStoresInfo.map(([, storeInfo]) => {
     const dbName = getDBName(storeInfo)
-    const { version, tags, creation } = storeInfo
+    const { version, tags, creation, key } = storeInfo
 
     // Create GetSetDel token
     const token: GetSetDelStoreToken = {
@@ -57,6 +57,10 @@ export const queryInventory = async (
 
     if (tags) {
       token.tags = tags
+    }
+
+    if (key) {
+      token.key = key
     }
 
     return token

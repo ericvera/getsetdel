@@ -16,7 +16,7 @@ import {
  * required, the function clears all data as well as its details stored in the
  * inventory. If the store does not exist, or if a reset was performed, the
  * function creates a new store and adds it to the inventory including a new
- * creation time. A token contianing the store reference and the creation time
+ * creation time. A token containing the store reference and the creation time
  * is returned which is to be passed to all subsequent GetSetDel functions to
  * ensure that the underlying store has not been reset.
  * @param storeInfo Information about the store.
@@ -26,10 +26,7 @@ export const createStore = async (storeInfo: GetSetDelStoreInfo) => {
   const inventoryStore = createInventoryStore()
 
   // Get local inventory details
-  let storeDetails = await get<GetSetDelStoreInfoData>(
-    dbName,
-    createInventoryStore(),
-  )
+  let storeDetails = await get<GetSetDelStoreInfoData>(dbName, inventoryStore)
 
   if (storeDetails) {
     // Check if version or the tags are different in which case data needs to be
@@ -85,6 +82,10 @@ export const createStore = async (storeInfo: GetSetDelStoreInfo) => {
 
   if (storeDetails.tags !== undefined) {
     token.tags = storeDetails.tags
+  }
+
+  if (storeDetails.key !== undefined) {
+    token.key = storeDetails.key
   }
 
   return token

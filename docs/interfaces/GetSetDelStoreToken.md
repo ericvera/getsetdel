@@ -35,6 +35,18 @@ Name of the IndexedDB database that is used to store the data.
 
 ---
 
+### key?
+
+> `optional` **key**: `string`
+
+Key of the store.
+
+#### Defined in
+
+[src/types.ts:43](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L43)
+
+---
+
 ### store
 
 > **store**: `UseStore`
@@ -55,7 +67,7 @@ Tags that describe the store at the time of creation.
 
 #### Defined in
 
-[src/types.ts:48](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L48)
+[src/types.ts:53](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L53)
 
 ---
 
@@ -67,4 +79,4 @@ Version of the data/schema at the time of creation.
 
 #### Defined in
 
-[src/types.ts:43](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L43)
+[src/types.ts:48](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L48)

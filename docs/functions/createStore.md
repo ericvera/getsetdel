@@ -14,7 +14,7 @@ different from the ones defined in the stores inventory. If a reset is
 required, the function clears all data as well as its details stored in the
 inventory. If the store does not exist, or if a reset was performed, the
 function creates a new store and adds it to the inventory including a new
-creation time. A token contianing the store reference and the creation time
+creation time. A token containing the store reference and the creation time
 is returned which is to be passed to all subsequent GetSetDel functions to
 ensure that the underlying store has not been reset.
 
