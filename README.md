@@ -5,144 +5,301 @@
 [![github license](https://img.shields.io/github/license/ericvera/getsetdel.svg?style=flat-square)](https://github.com/ericvera/getsetdel/blob/master/LICENSE)
 [![npm version](https://img.shields.io/npm/v/getsetdel.svg?style=flat-square)](https://npmjs.org/package/getsetdel)
 
-Features:
+## Features
 
-- Multiple named key-value stores
-- Built on top of IndexedDB (using [idb-keyval](https://www.npmjs.com/package/idb-keyval))
-- Keep track of created stores including a schema version and tags
-- Auto-clear data on version or tag changes
-- Support for custom store metadata
-- Query inventory of stores by name or tags
+- 🗂️ **Multiple Named Stores**: Create and manage multiple isolated key-value stores
+- 🔄 **Auto-Reset on Changes**: Automatically clear data when version or tags change
+- 🏷️ **Tagging System**: Organize stores with tags for easy querying and management
+- 📊 **Store Inventory**: Built-in inventory system to track all stores and metadata
+- 🔍 **Query Support**: Find stores by name or tags
+- 💾 **Metadata Support**: Store custom metadata alongside your data
+- ⚡ **IndexedDB Powered**: Built on top of [idb-keyval](https://www.npmjs.com/package/idb-keyval) for performance
+- 🔒 **Type-Safe**: Written in TypeScript with full type definitions
+- 🪶 **Lightweight**: Minimal overhead with a small API surface
 
-## Design
+## Requirements
 
-GetSetDel is a key-value store with an small inventory layer on top of it.
+- Node.js >= 20
+- Modern browser with IndexedDB support
 
-It choses clearing the store and hydrating it from scratch over dealing with complex data migrations. This is enabled by the inventory layer which keeps track of details that would invalidate the data (data/schema version or tags) as well as custom metadata that you may need (e.g. last sync timestamp) to keep the data up to date.
+## Installation
 
-### Storage Inventory Information
+```bash
+npm install getsetdel
+# or
+yarn add getsetdel
+# or
+pnpm add getsetdel
+```
 
-When creating a store (via `createStore`), you can provide an optional `version` (which can be used to keep track of schema changes) and an optional array `tags` (e.g. 'public', 'private' data). At the same time we keep track of `creation` which contains the time when the current instance of the store was created.
+## Design Philosophy
+
+GetSetDel is a key-value store with a small inventory layer on top of it. It chooses clearing the store and hydrating it from scratch over dealing with complex data migrations. This is enabled by the inventory layer which keeps track of details that would invalidate the data (data/schema version or tags) as well as custom metadata that you may need (e.g. last sync timestamp) to keep the data up to date.
 
 ### Data Invalidation
 
 Instead of dealing with data migrations, we just get rid of all the data and start over. This happens in two ways:
 
-1. **During store creation (i.e. `createStore`):** At this time, if the data is invalidated, it is simply cleared (all data removed and inventory entry removed including all metadata).
-2. **During calls to all data access/modification methods (e.g. `get`, `set`, `del`, `entries`, etc.):** At this time, if the data is invalidated, it will throw a `GetSetDelResetError` exception which you can handle by clearing your state and starting over from `createStore`.
+1. **During store creation (`createStore`)**: If the data is invalidated, it is simply cleared (all data removed and inventory entry removed including all metadata).
+2. **During data access/modification**: If the data is invalidated, it will throw a `GetSetDelResetError` exception which you can handle by clearing your state and starting over from `createStore`.
 
-### Alternatives
+## Basic Usage
 
-If you would like to manage all your stores yourself or if you only need a single store, I suggest you use [idb-keyval](https://www.npmjs.com/package/idb-keyval) instead of this. If you need more complex IndexedDB functionality, idb-keyval suggests [IDB](https://www.npmjs.com/package/idb).
-
-## Usage
-
-### Creating (initializing) a store
+### Creating a Store
 
 ```typescript
 import { createStore } from 'getsetdel'
 
-// Option 1. Minimum required options
-// This will result in an IndexedDB databased named
-// 'getsetdel-store-name' with a store called 'store'
+// Minimum required options
 const storeToken = await createStore({
-  name: 'store-name',
+  name: 'my-store',
 })
 
-// Option 2. Store with all the options (name is the only
-// required prop)
-// This will result in an IndexedDB databased named
-// 'getsetdel-all-options-store--0001' with a store called 'store'
-const allOptionsStoreToken = await createStore({
-  name: 'all-options-store',
-  // In case you want to store data about a specific entity (this
-  // is behind the scenes just added to the IndexedDB name)
-  key: '0001',
-  // Data is cleared whenever createStore is called with different
-  // values on the following:
-  tags: ['private', 'other'],
-  version: 1,
+// Store with all options
+const storeToken = await createStore({
+  name: 'user-data',
+  key: 'user-123', // Optional: for entity-specific stores
+  version: 1, // Optional: schema version
+  tags: ['private', 'user'], // Optional: for categorization
 })
 ```
 
-### Accessing/deleting data
+### Storing and Retrieving Data
 
 ```typescript
-import { createStore, del, set } from 'getsetdel'
+import { createStore, set, get, del } from 'getsetdel'
 
 const storeToken = await createStore({
-  name: 'store-name',
+  name: 'app-data',
 })
 
-// To add data you can use set or setMany
-await set(storeToken, 'key1', { some: 'data', here: true })
+// Store data
+await set(storeToken, 'user-preferences', { theme: 'dark', language: 'en' })
 
-// To get data you can use get, getMany (retrieve many keys
-// at once), or entries (returns key-value pairs for all
-// the entries in the store)
-const key1Value = await get(storeToken, 'key1')
-console.log(key1Value)
+// Retrieve data
+const preferences = await get(storeToken, 'user-preferences')
+console.log(preferences) // { theme: 'dark', language: 'en' }
 
-// To remove the data you can use del, delMany, or clear
-// to fully remove the data and the store entry in the
-// inventory.
-await del(storeToken, 'key1')
+// Delete data
+await del(storeToken, 'user-preferences')
 ```
 
-### Metadata
+### Working with Multiple Keys
 
 ```typescript
-// Get the metadata
-const metadata = await getMetadata(storeToken)
+// Store multiple key-value pairs at once
+await setMany(storeToken, [
+  ['key1', 'value1'],
+  ['key2', { complex: 'object' }],
+  ['key3', [1, 2, 3]],
+])
 
-// Set the metadata (This is a full overwrite and not
-// a merge)
-await setMetadata(storeToken, {
+// Retrieve multiple keys at once
+const values = await getMany(storeToken, ['key1', 'key2'])
+console.log(values) // ['value1', { complex: 'object' }]
+
+// Get all entries in the store
+const allEntries = await entries(storeToken)
+console.log(allEntries) // [['key1', 'value1'], ['key2', { complex: 'object' }], ...]
+
+// Delete multiple keys
+await delMany(storeToken, ['key1', 'key2'])
+```
+
+### Managing Metadata
+
+```typescript
+// Set custom metadata for the store
+await setMeta(storeToken, {
+  lastSync: Date.now(),
+  syncVersion: '2.1',
+  customField: 'custom-value',
+})
+
+// Retrieve metadata
+const metadata = await getMeta(storeToken)
+console.log(metadata.lastSync) // timestamp
+
+// Update metadata (full overwrite)
+await setMeta(storeToken, {
   ...metadata,
   lastSync: Date.now(),
 })
 ```
 
-### Reset handling
-
-GetSetDel provides a helper method to manage `GetSetDelResetError`.
+### Error Handling with Reset Detection
 
 ```typescript
-const onStoreError = async () => {
-  // Do what you need to reset the state of your code and
-  // re-initialize the store by calling `createStore`
+import { handleResetError } from 'getsetdel'
+
+const onStoreReset = async () => {
+  // Clear your application state
+  // Re-initialize the store
+  const newStoreToken = await createStore({
+    name: 'my-store',
+    version: 1,
+  })
+  // Reload your data
 }
 
-// When the `version` prop, `creation` timestamp, or `tags` change,
-// `onStoreError` is called. In the case of any other exception is thrown, the
-// exception is just re-thrown.
-await set(storeToken, 'key', { data: 'hello' }).handleResetError(onStoreError)
+// Automatically handle reset errors
+await handleResetError(() => set(storeToken, 'key', 'value'), onStoreReset)
 ```
 
-### Query Inventory
-
-You can query the inventory by `name` or `tags`.
-
-Example 1. Clear all the data tagged as `private` when a user logs out.
+### Querying Store Inventory
 
 ```typescript
-const privateStoreTokens = await queryInventory({
+import { queryInventory, clear } from 'getsetdel'
+
+// Find all stores with specific tags
+const privateStores = await queryInventory({
   includesAnyTag: ['private'],
 })
 
-await Promise.all(privateStoreTokens.map((token) => clear(token)))
-```
+// Clear all private data when user logs out
+await Promise.all(privateStores.map((token) => clear(token)))
 
-Example 2. For clearing multiple stores called `todo-items` with `key` that matches project ids (e.g. `{ name: 'todo-items', key: 'projectid0001'}` and `{ name: 'todo-items', key: 'projectid0002'}`).
-
-```typescript
-const privateStoreTokens = await queryInventory({
+// Find stores by name pattern
+const todoStores = await queryInventory({
   name: 'todo-items',
 })
-
-await Promise.all(privateStoreTokens.map((token) => clear(token)))
 ```
 
-# API Reference
+## API Reference
 
-See [docs](docs/README.md)
+### Core Functions
+
+#### `createStore(storeInfo: GetSetDelStoreInfo): Promise<GetSetDelStoreToken>`
+
+Creates or initializes a store. If the store exists but has different version/tags, it will be cleared and recreated.
+
+**Parameters:**
+
+- `storeInfo.name` (string, required): Name of the store
+- `storeInfo.key` (string, optional): Entity-specific identifier
+- `storeInfo.version` (number, optional): Schema version for invalidation
+- `storeInfo.tags` (string[], optional): Tags for categorization
+
+**Returns:** Store token for use with other functions
+
+#### `set(token: GetSetDelStoreToken, key: string, value: any): Promise<void>`
+
+Stores a value with the given key.
+
+#### `get<T>(token: GetSetDelStoreToken, key: string): Promise<T | undefined>`
+
+Retrieves a value by key. Returns `undefined` if key doesn't exist.
+
+#### `del(token: GetSetDelStoreToken, key: string): Promise<void>`
+
+Deletes a key-value pair from the store.
+
+#### `clear(token: GetSetDelStoreToken): Promise<void>`
+
+Clears all data from the store and removes it from the inventory.
+
+### Batch Operations
+
+#### `setMany(token: GetSetDelStoreToken, entries: [string, any][]): Promise<void>`
+
+Stores multiple key-value pairs at once.
+
+#### `getMany<T>(token: GetSetDelStoreToken, keys: string[]): Promise<(T | undefined)[]>`
+
+Retrieves multiple values by their keys.
+
+#### `delMany(token: GetSetDelStoreToken, keys: string[]): Promise<void>`
+
+Deletes multiple keys from the store.
+
+### Store Inspection
+
+#### `entries<T>(token: GetSetDelStoreToken): Promise<[string, T][]>`
+
+Returns all key-value pairs in the store.
+
+#### `keys(token: GetSetDelStoreToken): Promise<string[]>`
+
+Returns all keys in the store.
+
+### Metadata Management
+
+#### `setMeta<T>(token: GetSetDelStoreToken, metadata: T): Promise<void>`
+
+Sets custom metadata for the store (full overwrite).
+
+#### `getMeta<T>(token: GetSetDelStoreToken): Promise<T | undefined>`
+
+Retrieves the custom metadata for the store.
+
+### Inventory and Querying
+
+#### `queryInventory(query: { name?: string, includesAnyTag?: string[] }): Promise<GetSetDelStoreToken[]>`
+
+Queries the store inventory to find stores matching the criteria.
+
+**Parameters:**
+
+- `query.name` (string, optional): Exact name match
+- `query.includesAnyTag` (string[], optional): Stores containing any of these tags
+
+### Error Handling
+
+#### `handleResetError<T>(operation: () => Promise<T>, onReset: () => Promise<void>): Promise<T>`
+
+Executes an operation and handles `GetSetDelResetError` by calling the reset handler.
+
+#### `GetSetDelResetError`
+
+Exception thrown when store data has been invalidated due to version or tag changes.
+
+## Advanced Examples
+
+### Multi-tenant Application
+
+```typescript
+// Create stores for different users
+const userStore = await createStore({
+  name: 'user-data',
+  key: userId,
+  version: 1,
+  tags: ['private', 'user'],
+})
+
+const sharedStore = await createStore({
+  name: 'shared-data',
+  version: 1,
+  tags: ['public', 'shared'],
+})
+```
+
+### Data Versioning
+
+```typescript
+// When you need to change your data schema
+const storeToken = await createStore({
+  name: 'app-data',
+  version: 2, // Increment version to clear old data
+})
+```
+
+### Cleanup on Logout
+
+```typescript
+const cleanup = async () => {
+  // Clear all private user data
+  const privateStores = await queryInventory({
+    includesAnyTag: ['private'],
+  })
+
+  await Promise.all(privateStores.map((token) => clear(token)))
+}
+```
+
+## Alternatives
+
+If you would like to manage all your stores yourself or if you only need a single store, consider using [idb-keyval](https://www.npmjs.com/package/idb-keyval) instead. For more complex IndexedDB functionality, idb-keyval suggests [IDB](https://www.npmjs.com/package/idb).
+
+## License
+
+MIT License - see the LICENSE file for details.
