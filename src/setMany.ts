@@ -7,6 +7,7 @@ import { GetSetDelStoreToken } from './types.js'
  * store has been reset, the function throws a GetSetDelResetError. If the store
  * has not been reset, the function sets the entries in the store.
  */
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export const setMany = async <T>(
   storeToken: GetSetDelStoreToken,
   entries: [string, T][],

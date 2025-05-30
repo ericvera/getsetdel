@@ -6,6 +6,8 @@
 
 # Interface: GetSetDelStoreToken
 
+Defined in: [src/types.ts:24](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L24)
+
 Token that keeps track of the database name and store as well as information
 that ensures the store is up to date.
 
@@ -15,11 +17,9 @@ that ensures the store is up to date.
 
 > **creation**: `number`
 
+Defined in: [src/types.ts:38](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L38)
+
 Timestamp of when the store was created.
-
-#### Defined in
-
-[src/types.ts:38](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L38)
 
 ---
 
@@ -27,11 +27,9 @@ Timestamp of when the store was created.
 
 > **dbName**: `string`
 
+Defined in: [src/types.ts:28](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L28)
+
 Name of the IndexedDB database that is used to store the data.
-
-#### Defined in
-
-[src/types.ts:28](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L28)
 
 ---
 
@@ -39,11 +37,9 @@ Name of the IndexedDB database that is used to store the data.
 
 > `optional` **key**: `string`
 
+Defined in: [src/types.ts:43](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L43)
+
 Key of the store.
-
-#### Defined in
-
-[src/types.ts:43](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L43)
 
 ---
 
@@ -51,11 +47,9 @@ Key of the store.
 
 > **store**: `UseStore`
 
+Defined in: [src/types.ts:33](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L33)
+
 Reference to idb-keyval's store.
-
-#### Defined in
-
-[src/types.ts:33](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L33)
 
 ---
 
@@ -63,11 +57,9 @@ Reference to idb-keyval's store.
 
 > `optional` **tags**: `string`[]
 
+Defined in: [src/types.ts:53](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L53)
+
 Tags that describe the store at the time of creation.
-
-#### Defined in
-
-[src/types.ts:53](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L53)
 
 ---
 
@@ -75,8 +67,6 @@ Tags that describe the store at the time of creation.
 
 > `optional` **version**: `number`
 
+Defined in: [src/types.ts:48](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L48)
+
 Version of the data/schema at the time of creation.
-
-#### Defined in
-
-[src/types.ts:48](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L48)

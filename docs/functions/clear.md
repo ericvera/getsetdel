@@ -8,6 +8,8 @@
 
 > **clear**(`storeToken`): `Promise`\<`void`\>
 
+Defined in: [src/clear.ts:9](https://github.com/ericvera/getsetdel/blob/main/src/clear.ts#L9)
+
 Clears all data from the specified store and removes it from the
 inventory. Since the data is being removed, there is no check about the state
 of the store.
@@ -21,7 +23,3 @@ of the store.
 ## Returns
 
 `Promise`\<`void`\>
-
-## Defined in
-
-[src/clear.ts:9](https://github.com/ericvera/getsetdel/blob/main/src/clear.ts#L9)

@@ -8,6 +8,8 @@
 
 > **getMeta**\<`TMeta`\>(`storeToken`): `Promise`\<`undefined` \| `TMeta`\>
 
+Defined in: [src/getMeta.ts:9](https://github.com/ericvera/getsetdel/blob/main/src/getMeta.ts#L9)
+
 First checks that the store has not been reset by another instance. If the
 store has been reset, the function throws a GetSetDelResetError. If the store
 has not been reset, the function returns the metadata of the store.
@@ -27,7 +29,3 @@ has not been reset, the function returns the metadata of the store.
 ## Returns
 
 `Promise`\<`undefined` \| `TMeta`\>
-
-## Defined in
-
-[src/getMeta.ts:9](https://github.com/ericvera/getsetdel/blob/main/src/getMeta.ts#L9)

@@ -8,6 +8,8 @@
 
 > **get**\<`T`\>(`storeToken`, `key`): `Promise`\<`undefined` \| `T`\>
 
+Defined in: [src/get.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/get.ts#L10)
+
 First checks that the store has not been reset by another instance. If the
 store has been reset, the function throws a GetSetDelResetError. If the store
 has not been reset, the function returns the value of the key in the store.
@@ -28,7 +30,3 @@ has not been reset, the function returns the value of the key in the store.
 ## Returns
 
 `Promise`\<`undefined` \| `T`\>
-
-## Defined in
-
-[src/get.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/get.ts#L10)

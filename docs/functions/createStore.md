@@ -8,6 +8,8 @@
 
 > **createStore**(`storeInfo`): `Promise`\<[`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md)\>
 
+Defined in: [src/createStore.ts:24](https://github.com/ericvera/getsetdel/blob/main/src/createStore.ts#L24)
+
 If the store exists, the function checks if the store needs to be reset. A
 reset happens if the version or the tags provided in storeInfo parameter are
 different from the ones defined in the stores inventory. If a reset is
@@ -27,7 +29,3 @@ ensure that the underlying store has not been reset.
 ## Returns
 
 `Promise`\<[`GetSetDelStoreToken`](../interfaces/GetSetDelStoreToken.md)\>
-
-## Defined in
-
-[src/createStore.ts:24](https://github.com/ericvera/getsetdel/blob/main/src/createStore.ts#L24)

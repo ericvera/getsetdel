@@ -6,6 +6,8 @@
 
 # Interface: GetSetDelStoreInfo
 
+Defined in: [src/types.ts:3](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L3)
+
 ## Extended by
 
 - [`GetSetDelStoreInfoData`](GetSetDelStoreInfoData.md)
@@ -16,9 +18,7 @@
 
 > `optional` **key**: `string`
 
-#### Defined in
-
-[src/types.ts:6](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L6)
+Defined in: [src/types.ts:6](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L6)
 
 ---
 
@@ -26,9 +26,7 @@
 
 > **name**: `string`
 
-#### Defined in
-
-[src/types.ts:4](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L4)
+Defined in: [src/types.ts:4](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L4)
 
 ---
 
@@ -36,9 +34,7 @@
 
 > `optional` **tags**: `string`[]
 
-#### Defined in
-
-[src/types.ts:7](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L7)
+Defined in: [src/types.ts:7](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L7)
 
 ---
 
@@ -46,6 +42,4 @@
 
 > `optional` **version**: `number`
 
-#### Defined in
-
-[src/types.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L5)
+Defined in: [src/types.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L5)

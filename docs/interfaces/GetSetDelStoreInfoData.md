@@ -6,6 +6,8 @@
 
 # Interface: GetSetDelStoreInfoData\<TMeta\>
 
+Defined in: [src/types.ts:10](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L10)
+
 ## Extends
 
 - [`GetSetDelStoreInfo`](GetSetDelStoreInfo.md)
@@ -22,11 +24,9 @@
 
 > **creation**: `number`
 
+Defined in: [src/types.ts:15](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L15)
+
 Timestamp of when the store was created.
-
-#### Defined in
-
-[src/types.ts:15](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L15)
 
 ---
 
@@ -34,13 +34,11 @@ Timestamp of when the store was created.
 
 > `optional` **key**: `string`
 
+Defined in: [src/types.ts:6](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L6)
+
 #### Inherited from
 
 [`GetSetDelStoreInfo`](GetSetDelStoreInfo.md).[`key`](GetSetDelStoreInfo.md#key)
-
-#### Defined in
-
-[src/types.ts:6](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L6)
 
 ---
 
@@ -48,9 +46,7 @@ Timestamp of when the store was created.
 
 > `optional` **meta**: `TMeta`
 
-#### Defined in
-
-[src/types.ts:17](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L17)
+Defined in: [src/types.ts:17](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L17)
 
 ---
 
@@ -58,13 +54,11 @@ Timestamp of when the store was created.
 
 > **name**: `string`
 
+Defined in: [src/types.ts:4](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L4)
+
 #### Inherited from
 
 [`GetSetDelStoreInfo`](GetSetDelStoreInfo.md).[`name`](GetSetDelStoreInfo.md#name)
-
-#### Defined in
-
-[src/types.ts:4](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L4)
 
 ---
 
@@ -72,13 +66,11 @@ Timestamp of when the store was created.
 
 > `optional` **tags**: `string`[]
 
+Defined in: [src/types.ts:7](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L7)
+
 #### Inherited from
 
 [`GetSetDelStoreInfo`](GetSetDelStoreInfo.md).[`tags`](GetSetDelStoreInfo.md#tags)
-
-#### Defined in
-
-[src/types.ts:7](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L7)
 
 ---
 
@@ -86,10 +78,8 @@ Timestamp of when the store was created.
 
 > `optional` **version**: `number`
 
+Defined in: [src/types.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L5)
+
 #### Inherited from
 
 [`GetSetDelStoreInfo`](GetSetDelStoreInfo.md).[`version`](GetSetDelStoreInfo.md#version)
-
-#### Defined in
-
-[src/types.ts:5](https://github.com/ericvera/getsetdel/blob/main/src/types.ts#L5)
