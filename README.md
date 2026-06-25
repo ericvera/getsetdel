@@ -2,7 +2,7 @@
 
 **Key-value store implemented on top of IndexedDB with a small metadata layer to support store management.**
 
-[![github license](https://img.shields.io/github/license/ericvera/getsetdel.svg?style=flat-square)](https://github.com/ericvera/getsetdel/blob/master/LICENSE)
+[![github license](https://img.shields.io/github/license/ericvera/getsetdel.svg?style=flat-square)](https://github.com/ericvera/getsetdel/blob/main/LICENSE)
 [![npm version](https://img.shields.io/npm/v/getsetdel.svg?style=flat-square)](https://npmjs.org/package/getsetdel)
 
 ## Features
@@ -19,7 +19,7 @@
 
 ## Requirements
 
-- Node.js >= 20
+- Node.js >= 24
 - Modern browser with IndexedDB support
 
 ## Installation
@@ -142,8 +142,9 @@ const onStoreReset = async () => {
   // Reload your data
 }
 
-// Automatically handle reset errors
-await handleResetError(() => set(storeToken, 'key', 'value'), onStoreReset)
+// Automatically handle reset errors. `handleResetError(onReset)` returns an
+// error handler you pass to `.catch`.
+await set(storeToken, 'key', 'value').catch(handleResetError(onStoreReset))
 ```
 
 ### Querying Store Inventory
@@ -245,9 +246,9 @@ Queries the store inventory to find stores matching the criteria.
 
 ### Error Handling
 
-#### `handleResetError<T>(operation: () => Promise<T>, onReset: () => Promise<void>): Promise<T>`
+#### `handleResetError(onReset: () => Promise<void>): (error: unknown) => Promise<void>`
 
-Executes an operation and handles `GetSetDelResetError` by calling the reset handler.
+Returns an error handler (for use with `.catch`) that calls `onReset` when the error is a `GetSetDelResetError`, and rethrows any other error.
 
 #### `GetSetDelResetError`
 
