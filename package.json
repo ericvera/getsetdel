@@ -33,14 +33,14 @@
     "@eslint/js": "^10.0.1",
     "@tsconfig/strictest": "^2.0.8",
     "@types/node": "^24.13.2",
-    "eslint": "^10.6.0",
+    "eslint": "^10.7.0",
     "happy-dom": "^20.10.6",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.8",
     "pinst": "^3.0.0",
-    "prettier": "^3.9.4",
+    "prettier": "^3.9.5",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.62.1",
+    "typescript-eslint": "^8.63.0",
     "vitest": "^4.1.10"
   },
   "prettier": {
