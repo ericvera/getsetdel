@@ -38,7 +38,20 @@ it('can set meta on a non-existing store', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"],"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-all-details-db--000": {
+            "creation": 1732194735000,
+            "key": "000",
+            "meta": {
+              "other": 123,
+              "someMeta": "some-meta",
+            },
+            "name": "all-details-db",
+            "tags": [
+              "private",
+              "public",
+            ],
+            "version": 1,
+          },
         },
       },
     }
@@ -58,13 +71,31 @@ it('can set meta on an existing store', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"],"meta":{"someMeta":"some-meta","other":123}}",
-          "getsetdel-public-db": "{"name":"public-db","creation":1732194735000}",
+          "getsetdel-all-details-db--000": {
+            "creation": 1732194735000,
+            "key": "000",
+            "meta": {
+              "other": 123,
+              "someMeta": "some-meta",
+            },
+            "name": "all-details-db",
+            "tags": [
+              "private",
+              "public",
+            ],
+            "version": 1,
+          },
+          "getsetdel-public-db": {
+            "creation": 1732194735000,
+            "name": "public-db",
+          },
         },
       },
       "getsetdel-public-db": {
         "store": {
-          "some-key-1": "{"message":"hello 1"}",
+          "some-key-1": {
+            "message": "hello 1",
+          },
         },
       },
     }
@@ -89,8 +120,27 @@ it('can set meta multiple times which overwrites the previous one', async () => 
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-info-db--111": "{"name":"info-db","creation":1732194735000,"key":"111","version":0,"meta":{"someMeta":"some-meta","other":123}}",
-          "getsetdel-private-db-2": "{"name":"private-db-2","creation":1732194735000,"version":1,"tags":["private"],"meta":{"other":456}}",
+          "getsetdel-info-db--111": {
+            "creation": 1732194735000,
+            "key": "111",
+            "meta": {
+              "other": 123,
+              "someMeta": "some-meta",
+            },
+            "name": "info-db",
+            "version": 0,
+          },
+          "getsetdel-private-db-2": {
+            "creation": 1732194735000,
+            "meta": {
+              "other": 456,
+            },
+            "name": "private-db-2",
+            "tags": [
+              "private",
+            ],
+            "version": 1,
+          },
         },
       },
       "getsetdel-private-db-2": {

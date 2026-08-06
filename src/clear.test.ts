@@ -46,7 +46,10 @@ it('can clear multiple stores', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-public-db": "{"name":"public-db","creation":1732194735000}",
+          "getsetdel-public-db": {
+            "creation": 1732194735000,
+            "name": "public-db",
+          },
         },
       },
       "getsetdel-private-db-2": {

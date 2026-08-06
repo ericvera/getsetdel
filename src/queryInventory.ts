@@ -3,9 +3,24 @@ import { createInventoryStore, StoreName } from './internal/constants.js'
 import { getDBName } from './internal/getDBName.js'
 import { GetSetDelStoreInfoData, GetSetDelStoreToken } from './types.js'
 
-interface GetStoresInfoQuery {
+/**
+ * Criteria used to select stores from the inventory. Omitted properties are not
+ * used to filter, so an empty query selects every store.
+ */
+export interface GetSetDelInventoryQuery {
+  /**
+   * Selects stores whose name matches exactly.
+   */
   name?: string
+
+  /**
+   * Selects stores tagged with at least one of these tags.
+   */
   includesAnyTag?: string[]
+
+  /**
+   * Selects stores tagged with every one of these tags.
+   */
   includesAllTags?: string[]
 }
 
@@ -14,7 +29,7 @@ interface GetStoresInfoQuery {
  * @returns An array of tokens containing the store reference and creation time.
  */
 export const queryInventory = async (
-  query: GetStoresInfoQuery = {},
+  query: GetSetDelInventoryQuery = {},
 ): Promise<GetSetDelStoreToken[]> => {
   // Get all the store entries in inventory
   let resultStoresInfo = await entries<string, GetSetDelStoreInfoData>(

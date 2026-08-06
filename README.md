@@ -16,6 +16,7 @@
 - ⚡ **IndexedDB Powered**: Built on top of [idb-keyval](https://www.npmjs.com/package/idb-keyval) for performance
 - 🔒 **Type-Safe**: Written in TypeScript with full type definitions
 - 🪶 **Lightweight**: Minimal overhead with a small API surface
+- 🧪 **Testing Included**: Ships an in-memory backend (`getsetdel/testing/idb-keyval`) and a mock factory (`getsetdel/testing`), so no `fake-indexeddb` is needed
 
 ## Requirements
 
@@ -201,7 +202,7 @@ Clears all data from the store and removes it from the inventory.
 
 ### Batch Operations
 
-#### `setMany(token: GetSetDelStoreToken, entries: [string, any][]): Promise<void>`
+#### `setMany<T>(token: GetSetDelStoreToken, entries: [string, T][]): Promise<void>`
 
 Stores multiple key-value pairs at once.
 
@@ -235,14 +236,23 @@ Retrieves the custom metadata for the store.
 
 ### Inventory and Querying
 
-#### `queryInventory(query: { name?: string, includesAnyTag?: string[] }): Promise<GetSetDelStoreToken[]>`
+#### `queryInventory(query?: GetSetDelInventoryQuery): Promise<GetSetDelStoreToken[]>`
 
-Queries the store inventory to find stores matching the criteria.
+Queries the store inventory to find stores matching the criteria. Omitted properties are not used to filter, so an empty query returns every store.
 
 **Parameters:**
 
 - `query.name` (string, optional): Exact name match
-- `query.includesAnyTag` (string[], optional): Stores containing any of these tags
+- `query.includesAnyTag` (string[], optional): Stores containing **any** of these tags
+- `query.includesAllTags` (string[], optional): Stores containing **all** of these tags
+
+#### `GetSetDelInventoryQuery`
+
+The type of `queryInventory`'s parameter. Every property is optional.
+
+- `name` (string, optional): Selects stores whose name matches exactly
+- `includesAnyTag` (string[], optional): Selects stores tagged with at least one of these tags
+- `includesAllTags` (string[], optional): Selects stores tagged with every one of these tags
 
 ### Error Handling
 
@@ -296,6 +306,167 @@ const cleanup = async () => {
   await Promise.all(privateStores.map((token) => clear(token)))
 }
 ```
+
+## Testing
+
+Code that stores through getsetdel cannot be unit tested without an IndexedDB, and a hand-written fake of the store tends to drift away from the real API — which means it hides the bugs it was written to catch. getsetdel ships the two pieces you need instead:
+
+- **`getsetdel/testing/idb-keyval`** — an in-memory stand-in for `idb-keyval`, the backend getsetdel stores through. You do not need `fake-indexeddb`.
+- **`getsetdel/testing`** — `createGetSetDelMock`, a factory that wraps the real getsetdel module so every member still works, and adds a handful of switches for the failures you cannot provoke from the outside.
+
+They are used together but they are separate imports and they live in different places: the backend goes in your test setup file, the factory in a `__mocks__` shim at your project root. The examples below use Vitest.
+
+### Substituting the backend
+
+```typescript
+// vitest.setup.ts
+import { testClearMockIndexedDB } from 'getsetdel/testing/idb-keyval'
+import { beforeEach, vi } from 'vitest'
+
+// `idb-keyval` is getsetdel's dependency, not yours — mocking it here swaps out
+// the storage backend underneath getsetdel while getsetdel itself stays real.
+vi.mock('idb-keyval', async () => import('getsetdel/testing/idb-keyval'))
+
+beforeEach(() => {
+  testClearMockIndexedDB()
+})
+```
+
+The setup file is not enough on its own. Vitest externalizes packages that come from `node_modules`, so getsetdel's own `import 'idb-keyval'` would resolve natively and never see the mock above — your first `createStore` would fail with `ReferenceError: indexedDB is not defined` from inside `node_modules/idb-keyval`. Inlining getsetdel is what routes its `idb-keyval` import through your module mocks:
+
+```typescript
+// vitest.config.ts
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    setupFiles: ['./vitest.setup.ts'],
+
+    // getsetdel must be inlined so its own `idb-keyval` import goes through the
+    // mock in the setup file instead of loading the real one from node_modules.
+    server: {
+      deps: {
+        inline: ['getsetdel'],
+      },
+    },
+  },
+})
+```
+
+Mocking a transitive dependency looks surprising in a setup file, but that is the point: your code under test keeps calling the real `createStore`, `set`, and `get`, and only the bytes underneath are in memory.
+
+Do not skip the `beforeEach`. The backend holds its data in module scope, so without `testClearMockIndexedDB()` whatever one test case writes is still there for the next one. `testGetMockIndexedDBData()` is also available and returns a snapshot of everything stored, which is handy for a single assertion over the whole database.
+
+### Sharing one mock per test file
+
+The shim goes in a `__mocks__` directory at your project root, next to `node_modules` — not next to the test that uses it. Vitest resolves `__mocks__` for a bare package specifier from the project root, so a shim placed anywhere else is silently ignored: `vi.mock('getsetdel')` falls back to automocking the package, and the test fails on a confusing assertion instead of a wiring error.
+
+```typescript
+// __mocks__/getsetdel/index.ts
+import { createGetSetDelMock } from 'getsetdel/testing'
+import { vi } from 'vitest'
+
+const mock = createGetSetDelMock(
+  await vi.importActual<typeof import('getsetdel')>('getsetdel'),
+)
+
+export const {
+  // getsetdel's own surface, delegating to the real implementation
+  clear,
+  createStore,
+  del,
+  delMany,
+  entries,
+  get,
+  getMany,
+  getMeta,
+  GetSetDelResetError,
+  handleResetError,
+  keys,
+  queryInventory,
+  set,
+  setMany,
+  setMeta,
+
+  // the test controls
+  failEntriesWith,
+  clearEntriesFault,
+  stubStore,
+  simulateStoreReset,
+  resetGetSetDelMock,
+} = mock
+```
+
+The factory is called once, at module scope, and that single call is what makes the shim work. Fault state is private to each `createGetSetDelMock` call, so one call per module means every importer in a test file — your test, and the code it is testing — shares the same set of switches. Call the factory inside a test or a helper instead and each caller gets its own switches, so arming a fault in the test would have no effect on the subject.
+
+A bare `vi.mock('getsetdel')` in the test file is what activates the shim:
+
+```typescript
+// src/dataCache.test.ts
+import { createStore, set } from 'getsetdel'
+import { beforeEach, expect, it, vi } from 'vitest'
+import {
+  failEntriesWith,
+  resetGetSetDelMock,
+} from '../__mocks__/getsetdel/index.js'
+import { loadAll } from './dataCache.js'
+
+// Picks up __mocks__/getsetdel/ at the project root
+vi.mock('getsetdel')
+
+beforeEach(() => {
+  resetGetSetDelMock()
+})
+
+it('falls back to the network when the cached read fails', async () => {
+  const token = await createStore({ name: 'data-cache', version: 1 })
+  await set(token, 'a', 1)
+
+  failEntriesWith(new Error('read failed'))
+
+  await expect(loadAll(token)).resolves.toEqual({ source: 'network' })
+})
+```
+
+### The controls
+
+- **`failEntriesWith(error)`** — makes every subsequent `entries` call reject with exactly this value, identity and type preserved. Any value works, including one that is falsy or is not an `Error`. Only `entries` sees it; every other member behaves as it would with nothing armed. Reach for it when you want a read to blow up while the rest of the store keeps working.
+- **`clearEntriesFault()`** — disarms that fault and changes nothing else. Use it when the case under test is supposed to recover partway through.
+- **`stubStore()`** — takes the store out of play for all 13 store-touching members: `createStore` resolves to a placeholder token, `entries`/`keys`/`queryInventory` resolve `[]`, `get`/`getMeta` resolve `undefined`, `getMany` resolves an array of `undefined` matching the key count, and the writes no-op. Only `resetGetSetDelMock()` disarms it.
+- **`await simulateStoreReset(token)`** — wipes that store the way another browser tab would. Afterwards every reset-guarded member called with the token throws a genuine `GetSetDelResetError`, raised by getsetdel's own store-state check rather than by a stub. This is the one asynchronous control — it returns a promise, where the other four are synchronous and return `void`, so it has to be awaited. Drop the `await` and the reset has not landed by the time the next call runs: a read comes back empty instead of throwing, and the case passes for the wrong reason.
+- **`resetGetSetDelMock()`** — disarms the fault and the stub, returning the mock to full delegation. Put it in a `beforeEach`. It does not undo a simulated reset or restore data; clearing data is `testClearMockIndexedDB()`'s job.
+
+The read fault and store stubbing are deliberately two controls rather than one, because tests want them in different combinations. A test whose subject recovers mid-case wants the fault cleared with the store still stubbed; a test with no fake timers wants the fault without giving up the real store. Stubbing earns its keep when you are driving a retry loop under fake timers — a cache that retries a reset with exponential backoff calls `createStore` on every attempt, and faulting only the read would leave it reopening a real store each time around. Every stubbed result settles on the microtask queue, so a fake-timer loop is never left waiting on a real event-loop turn.
+
+When more than one control is armed, they resolve in a strict order: **fault > stub > reset**. An armed read fault wins over stubbing, and stubbing wins over a simulated reset, so an error you asked for is never masked by one you did not.
+
+### Values come back as plain data
+
+Anything written to a store is structured-cloned, which means prototypes and methods do not survive the round trip. A value with behavior on it has to be revived on read:
+
+```typescript
+await set(token, 'lastSync', Timestamp.now())
+
+const stored = await get<{ seconds: number; nanoseconds: number }>(
+  token,
+  'lastSync',
+)
+
+// stored is a plain object, not a Timestamp — stored.toDate() does not exist
+const lastSync = stored
+  ? new Timestamp(stored.seconds, stored.nanoseconds)
+  : undefined
+```
+
+This is what a real IndexedDB does, and the in-memory backend reproduces it on purpose. Backing the tests with a plain `Map` would hand your methods back and let this class of bug reach production unseen — which is exactly why getsetdel ships a faithful backend rather than a trivial one.
+
+### Backend boundaries
+
+The in-memory backend covers the whole `idb-keyval` surface, with three edges worth knowing before you meet them at runtime:
+
+- **Keys are strings.** A non-string key rejects with a message naming the backend. getsetdel only ever uses string keys.
+- **`promisifyRequest` and an invoked `UseStore` handle exist for type compatibility only.** They are there so the module is assignable to `typeof import('idb-keyval')`, and they throw if you actually call them.
+- **One store name per database.** Asking for a second store name inside a database that already exists throws immediately. Real `idb-keyval` does not support this either — its `createStore` opens with `indexedDB.open(dbName)` and no version, so `onupgradeneeded` never fires for a database that already exists and the second object store is never created; the handle you get back fails at first use with a `NotFoundError`. The backend only differs in failing sooner and more clearly. Give each store its own database name instead.
 
 ## Alternatives
 

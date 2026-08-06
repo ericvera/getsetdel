@@ -10,7 +10,7 @@ import { GetSetDelStoreToken } from './types.js'
 export const getMany = async <T>(
   storeToken: GetSetDelStoreToken,
   keys: string[],
-): Promise<T[]> => {
+): Promise<(T | undefined)[]> => {
   await checkStoreState(storeToken)
 
   return idbGetMany(keys, storeToken.store)

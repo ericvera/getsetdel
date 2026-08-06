@@ -11,12 +11,17 @@ it('can set single item (key did not exist before)', async () => {
     {
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-public-db": "{"name":"public-db","creation":1732194735000}",
+          "getsetdel-public-db": {
+            "creation": 1732194735000,
+            "name": "public-db",
+          },
         },
       },
       "getsetdel-public-db": {
         "store": {
-          "some-key-1": "{"message":"hello 1"}",
+          "some-key-1": {
+            "message": "hello 1",
+          },
         },
       },
     }
@@ -32,13 +37,26 @@ it('can set multiple item', async () => {
     {
       "getsetdel-all-details-db--000": {
         "store": {
-          "some-key-1": "{"message":"hello 1"}",
-          "some-key-2": "{"message":"hello 2"}",
+          "some-key-1": {
+            "message": "hello 1",
+          },
+          "some-key-2": {
+            "message": "hello 2",
+          },
         },
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"]}",
+          "getsetdel-all-details-db--000": {
+            "creation": 1732194735000,
+            "key": "000",
+            "name": "all-details-db",
+            "tags": [
+              "private",
+              "public",
+            ],
+            "version": 1,
+          },
         },
       },
     }
@@ -61,13 +79,30 @@ it('can set multiple items after they are already set and does not clear meta', 
     {
       "getsetdel-all-details-db--000": {
         "store": {
-          "some-key-1": "{"message":"hello key 1 v2"}",
-          "some-key-2": "{"message":"hello key 2 v1"}",
+          "some-key-1": {
+            "message": "hello key 1 v2",
+          },
+          "some-key-2": {
+            "message": "hello key 2 v1",
+          },
         },
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"],"meta":{"someMeta":"some-meta","other":123}}",
+          "getsetdel-all-details-db--000": {
+            "creation": 1732194735000,
+            "key": "000",
+            "meta": {
+              "other": 123,
+              "someMeta": "some-meta",
+            },
+            "name": "all-details-db",
+            "tags": [
+              "private",
+              "public",
+            ],
+            "version": 1,
+          },
         },
       },
     }

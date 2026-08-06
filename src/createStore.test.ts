@@ -25,7 +25,16 @@ it('clears store if version is different', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":2,"tags":["private","public"]}",
+          "getsetdel-all-details-db--000": {
+            "creation": 1732194735000,
+            "key": "000",
+            "name": "all-details-db",
+            "tags": [
+              "private",
+              "public",
+            ],
+            "version": 2,
+          },
         },
       },
     }
@@ -50,7 +59,16 @@ it('clears store if tags are different', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["tag1","tag2"]}",
+          "getsetdel-all-details-db--000": {
+            "creation": 1732194735000,
+            "key": "000",
+            "name": "all-details-db",
+            "tags": [
+              "tag1",
+              "tag2",
+            ],
+            "version": 1,
+          },
         },
       },
     }
@@ -67,7 +85,16 @@ it('works when all data is valid and the store is new', async () => {
       },
       "getsetdel-inventory": {
         "store": {
-          "getsetdel-all-details-db--000": "{"name":"all-details-db","creation":1732194735000,"key":"000","version":1,"tags":["private","public"]}",
+          "getsetdel-all-details-db--000": {
+            "creation": 1732194735000,
+            "key": "000",
+            "name": "all-details-db",
+            "tags": [
+              "private",
+              "public",
+            ],
+            "version": 1,
+          },
         },
       },
     }
@@ -91,7 +118,7 @@ it('works when all data is valid and the store already exists', async () => {
   expect(before).toEqual(after)
 })
 
-it('works when all data is valid and the store already exists with a different key', async () => {
+it('creates a separate database when the store already exists with a different key', async () => {
   // Test prep: create a couple of other stores
   await createStore(AllDetailsDB)
   await createStore(InfoDBWithKey2)
@@ -105,5 +132,13 @@ it('works when all data is valid and the store already exists with a different k
 
   const after = testGetMockIndexedDBData()
 
-  expect(before).toEqual(after)
+  // A key addresses its own database, so this is a new store rather than the
+  // existing 'getsetdel-public-db'
+  expect(after).not.toEqual(before)
+  expect(before).not.toHaveProperty(['getsetdel-public-db--001'])
+  expect(after).toHaveProperty(['getsetdel-public-db--001'], { store: {} })
+  expect(after).toHaveProperty(
+    ['getsetdel-inventory', 'store', 'getsetdel-public-db--001'],
+    { name: 'public-db', creation: 1732194735000, key: '001' },
+  )
 })

@@ -7,8 +7,9 @@ export interface GetSetDelStoreInfo {
   tags?: string[]
 }
 
-export interface GetSetDelStoreInfoData<TMeta = Record<string, unknown>>
-  extends GetSetDelStoreInfo {
+export interface GetSetDelStoreInfoData<
+  TMeta = Record<string, unknown>,
+> extends GetSetDelStoreInfo {
   /**
    * Timestamp of when the store was created.
    */

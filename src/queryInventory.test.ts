@@ -1,5 +1,9 @@
 import { expect, it } from 'vitest'
 import {
+  set as setInBackend,
+  testGetMockIndexedDBData,
+} from './__mocks__/idb-keyval.js'
+import {
   AllDetailsDB,
   InfoDBWithKey1,
   InfoDBWithKey2,
@@ -7,7 +11,45 @@ import {
   PrivateDB2,
   PublicDB,
 } from './__test__/constants.js'
-import { createStore, queryInventory } from './index.js'
+import { createStore, GetSetDelStoreToken, queryInventory } from './index.js'
+
+const ProbeKey = 'handle-probe'
+
+type MockIndexedDBData = Record<
+  string,
+  Record<string, Record<string, unknown> | undefined> | undefined
+>
+
+const getProbeValue = (dbName: string) => `probe for ${dbName}`
+
+/**
+ * Drops the store handle. It is an opaque function, so a snapshot cannot show
+ * which database it addresses. `expectHandlesToAddressTheirDatabases` covers
+ * that instead.
+ */
+const withoutStore = ({
+  store,
+  ...token
+}: GetSetDelStoreToken): Omit<GetSetDelStoreToken, 'store'> => token
+
+/**
+ * Confirms every token's store handle addresses the database that the token
+ * names: a probe written through the handle has to land under that database
+ * name in the backing data.
+ */
+const expectHandlesToAddressTheirDatabases = async (
+  tokens: GetSetDelStoreToken[],
+): Promise<void> => {
+  for (const token of tokens) {
+    await setInBackend(ProbeKey, getProbeValue(token.dbName), token.store)
+  }
+
+  const data = testGetMockIndexedDBData() as MockIndexedDBData
+
+  expect(
+    tokens.map((token) => data[token.dbName]?.['store']?.[ProbeKey]),
+  ).toEqual(tokens.map((token) => getProbeValue(token.dbName)))
+}
 
 it('works when there are no entries in inventory (no parameters)', async () => {
   const result = await queryInventory()
@@ -31,15 +73,13 @@ it('works when there are entries in inventory (no parameters)', async () => {
   await createStore(AllDetailsDB)
 
   // Test
-  await expect(queryInventory()).resolves.toMatchInlineSnapshot(`
+  const result = await queryInventory()
+
+  expect(result.map(withoutStore)).toMatchInlineSnapshot(`
     [
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-private-db-1",
-        "store": Store {
-          "dbName": "getsetdel-private-db-1",
-          "storeName": "store",
-        },
         "tags": [
           "private",
         ],
@@ -48,10 +88,6 @@ it('works when there are entries in inventory (no parameters)', async () => {
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-private-db-2",
-        "store": Store {
-          "dbName": "getsetdel-private-db-2",
-          "storeName": "store",
-        },
         "tags": [
           "private",
         ],
@@ -61,10 +97,6 @@ it('works when there are entries in inventory (no parameters)', async () => {
         "creation": 1732194735000,
         "dbName": "getsetdel-all-details-db--000",
         "key": "000",
-        "store": Store {
-          "dbName": "getsetdel-all-details-db--000",
-          "storeName": "store",
-        },
         "tags": [
           "private",
           "public",
@@ -73,6 +105,8 @@ it('works when there are entries in inventory (no parameters)', async () => {
       },
     ]
   `)
+
+  await expectHandlesToAddressTheirDatabases(result)
 })
 
 it('works when there are entries in inventory (with parameters) and there are no matches', async () => {
@@ -97,19 +131,15 @@ it('works when there are entries in inventory (with tags) and there are matches'
   await createStore(PublicDB)
 
   // Test
-  await expect(
-    queryInventory({
-      includesAnyTag: ['private', 'tag2'],
-    }),
-  ).resolves.toMatchInlineSnapshot(`
+  const result = await queryInventory({
+    includesAnyTag: ['private', 'tag2'],
+  })
+
+  expect(result.map(withoutStore)).toMatchInlineSnapshot(`
     [
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-private-db-1",
-        "store": Store {
-          "dbName": "getsetdel-private-db-1",
-          "storeName": "store",
-        },
         "tags": [
           "private",
         ],
@@ -118,10 +148,6 @@ it('works when there are entries in inventory (with tags) and there are matches'
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-private-db-2",
-        "store": Store {
-          "dbName": "getsetdel-private-db-2",
-          "storeName": "store",
-        },
         "tags": [
           "private",
         ],
@@ -131,10 +157,6 @@ it('works when there are entries in inventory (with tags) and there are matches'
         "creation": 1732194735000,
         "dbName": "getsetdel-all-details-db--000",
         "key": "000",
-        "store": Store {
-          "dbName": "getsetdel-all-details-db--000",
-          "storeName": "store",
-        },
         "tags": [
           "private",
           "public",
@@ -143,6 +165,8 @@ it('works when there are entries in inventory (with tags) and there are matches'
       },
     ]
   `)
+
+  await expectHandlesToAddressTheirDatabases(result)
 })
 
 it('works when there are entries in inventory (with name) and there are matches', async () => {
@@ -155,35 +179,29 @@ it('works when there are entries in inventory (with name) and there are matches'
   await createStore(InfoDBWithKey2)
 
   // Test
-  await expect(
-    queryInventory({
-      name: 'info-db',
-    }),
-  ).resolves.toMatchInlineSnapshot(`
+  const result = await queryInventory({
+    name: 'info-db',
+  })
+
+  expect(result.map(withoutStore)).toMatchInlineSnapshot(`
     [
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-info-db--000",
         "key": "000",
-        "store": Store {
-          "dbName": "getsetdel-info-db--000",
-          "storeName": "store",
-        },
       },
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-info-db--111",
         "key": "111",
-        "store": Store {
-          "dbName": "getsetdel-info-db--111",
-          "storeName": "store",
-        },
       },
     ]
   `)
+
+  await expectHandlesToAddressTheirDatabases(result)
 })
 
-it('works when there are entries in inventory (with tags) and there are matches', async () => {
+it('works when there are entries in inventory (with all tags) and there are matches', async () => {
   // Test prep: add a few entries to inventory
   await createStore(PrivateDB1)
   await createStore(PrivateDB2)
@@ -193,20 +211,16 @@ it('works when there are entries in inventory (with tags) and there are matches'
   await createStore(InfoDBWithKey2)
 
   // Test
-  await expect(
-    queryInventory({
-      includesAllTags: ['private', 'public'],
-    }),
-  ).resolves.toMatchInlineSnapshot(`
+  const result = await queryInventory({
+    includesAllTags: ['private', 'public'],
+  })
+
+  expect(result.map(withoutStore)).toMatchInlineSnapshot(`
     [
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-all-details-db--000",
         "key": "000",
-        "store": Store {
-          "dbName": "getsetdel-all-details-db--000",
-          "storeName": "store",
-        },
         "tags": [
           "private",
           "public",
@@ -215,6 +229,8 @@ it('works when there are entries in inventory (with tags) and there are matches'
       },
     ]
   `)
+
+  await expectHandlesToAddressTheirDatabases(result)
 })
 
 it('works when there are entries in inventory (with key) and there are matches', async () => {
@@ -227,30 +243,24 @@ it('works when there are entries in inventory (with key) and there are matches',
   await createStore(InfoDBWithKey2)
 
   // Test
-  await expect(
-    queryInventory({
-      name: InfoDBWithKey1.name,
-    }),
-  ).resolves.toMatchInlineSnapshot(`
+  const result = await queryInventory({
+    name: InfoDBWithKey1.name,
+  })
+
+  expect(result.map(withoutStore)).toMatchInlineSnapshot(`
     [
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-info-db--000",
         "key": "000",
-        "store": Store {
-          "dbName": "getsetdel-info-db--000",
-          "storeName": "store",
-        },
       },
       {
         "creation": 1732194735000,
         "dbName": "getsetdel-info-db--111",
         "key": "111",
-        "store": Store {
-          "dbName": "getsetdel-info-db--111",
-          "storeName": "store",
-        },
       },
     ]
   `)
+
+  await expectHandlesToAddressTheirDatabases(result)
 })

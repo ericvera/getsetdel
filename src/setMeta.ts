@@ -9,8 +9,10 @@ import { GetSetDelStoreToken } from './types.js'
  * has not been reset, the function sets the meta of the store. WARNING: It will
  * replace the existing meta with the new meta rather than merging the two.
  */
-// Disable this rule because we need to use the type parameter to ensure that
-// the meta object is a valid type (known edge case in the rules documentation).
+// The type parameter appears once, so the rule reads it as removable. It is
+// kept for the explicit form: `setMeta<Meta>(token, meta)` checks the payload
+// against `Meta`, mirroring `getMeta<Meta>` on the read side. Replacing it with
+// `unknown` would silently accept a misspelled property.
 // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export const setMeta = async <T>(
   storeToken: GetSetDelStoreToken,
